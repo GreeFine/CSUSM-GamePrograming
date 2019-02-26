@@ -4,6 +4,8 @@
 
 using namespace Network;
 
+const unsigned int GameLoopSpeed = 10;
+
 GameRoom::GameRoom(std::shared_ptr<boost::asio::io_service> &p_io_service) : ISocket_(*new ABoostSocket<GameRoom, char>(p_io_service, 0)), port_(std::to_string(ISocket_.getPort()))
 {
 }
@@ -17,7 +19,7 @@ void GameRoom::start()
 	{
 		sendGameState();
 		alivePlayers();
-		std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		std::this_thread::sleep_for(std::chrono::milliseconds(GameLoopSpeed));
 	}
 }
 
@@ -72,32 +74,22 @@ void GameRoom::alivePlayers()
 		}
 }
 
-const std::string message = "\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{\
-{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{GameState}{";
+std::string message = "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||";
 void GameRoom::sendGameState()
 {
 	std::lock_guard<std::mutex> lock(mutex_);
 	for (auto &it : players_)
 	{
+		auto new_end = std::to_string(rand());
+		message.replace(message.size() - new_end.size(), new_end.size(), new_end.c_str());
 		it.second.newMessage(message.c_str(), message.length()); //DEBUG
 		auto packet = it.second.newPacket();
 		packet.serialize();
 		try
 		{
+			std::cout << "sendGameState -- ACK: " << packet.ack << std::endl;
+			std::cout << "sendGameState -- Size: " << packet.size() << std::endl;
+			std::cout << "sendGameState -- Mask: " << packet.ack_mask << std::endl;
 			ISocket_.async_send_to(packet.data(), packet.size(), it.second.enpoint_);
 		}
 		catch (std::exception &e)

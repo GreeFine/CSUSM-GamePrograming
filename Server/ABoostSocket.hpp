@@ -10,7 +10,7 @@ using boost::asio::ip::udp;
 namespace Network
 {
 
-const constexpr int MAX_RECV_SIZE = 1024 * 20;
+const constexpr int MAX_RECV_SIZE = 1024 * 1000;
 
 template <typename T, typename X>
 class ABoostSocket : public ISocket<T, X>
@@ -32,7 +32,7 @@ public:
 
 	void async_send_to(const X *p_message, size_t p_size, const std::shared_ptr<udp::endpoint> &p_endpoint)
 	{
-		std::cout << "Sending to " << *p_endpoint;
+		std::cout << "Sending to " << *p_endpoint << " size:" << p_size;
 		socket_.async_send_to(boost::asio::buffer(p_message, p_size), *p_endpoint,
 													std::bind(&ABoostSocket::handleSend, this, std::placeholders::_1, std::placeholders::_2));
 	}

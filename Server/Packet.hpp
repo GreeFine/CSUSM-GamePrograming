@@ -46,7 +46,7 @@ struct Message
 	bool toDelete = false;
 };
 
-const constexpr int PACKET_SIZE = 1024 * 20;
+const constexpr int PACKET_SIZE = 1024 * 1000;
 
 class Packet
 {
@@ -83,7 +83,10 @@ public:
 		for (auto &m : messages) //STOP if 1024 >
 		{
 			if (size_ + m.size_ > PACKET_SIZE)
+			{
+				std::cerr << "Packet overflow" << std::endl;
 				return;
+			}
 			writeInBuffer(m.id_);
 			writeInBuffer(m.size_);
 			writeInBuffer(m.buffer_, m.size_);

@@ -22,10 +22,13 @@ OBJS=		$(SRCS:.cpp=.o)
 
 RM=		rm -f
 
-all:		$(NAME)
+all:		$(NAME) test
 
 $(NAME):	$(OBJS)
 		$(CPP) -o $(NAME) $(OBJS) $(LDFLAGS) $(CPPFLAGS)
+
+test:
+	$(CPP) -o tester UdpTester.cpp $(LDFLAGS) $(CPPFLAGS)
 
 clean:
 		$(RM) $(OBJS)
@@ -33,10 +36,9 @@ clean:
 
 fclean:		clean
 		$(RM) $(NAME)
+		$(RM) tester
 
 re:		fclean all
 
-test:
-	$(CPP) -o tester UdpTester.cpp $(LDFLAGS) $(CPPFLAGS)
 
 .PHONY: all clean fclean re test

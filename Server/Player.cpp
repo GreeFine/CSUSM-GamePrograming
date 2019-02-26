@@ -42,16 +42,16 @@ void Player::openPacket(Packet &p_packet)
 const short ack_size = sizeof(Packet::ack_mask) * 8;
 void Player::ack_depile(Packet &p_packet)
 {
-	auto a_ack = p_packet.ack;
+	auto rcv_ack = p_packet.ack;
 	bool locked = false; //TODO best metodo ?
 
 	for (auto i = 0; i < ack_size; ++i)
 	{
 		if (p_packet.ack_mask & (1 << (i)))
 		{
-			//std::cout << "Packet " << a_ack + i << " : received" << std::endl;
+			std::cout << "Packet " << rcv_ack + i << " : received" << std::endl;
 			std::lock_guard<std::mutex> lock(mutex_);
-			auto it = message_container_.find(a_ack + i);
+			auto it = message_container_.find(rcv_ack + i);
 			if (it != message_container_.end())
 			{
 				delete it->second.buffer_;
@@ -60,9 +60,10 @@ void Player::ack_depile(Packet &p_packet)
 		}
 		else
 		{
-			if (cur_ack_ <= a_ack + i && !locked)
+			std::cout << "ack_depile -- cur?:" << cur_ack_ << " i:" << i << " locked:" << locked << std::endl;
+			if (cur_ack_ <= rcv_ack + i && !locked)
 			{
-				cur_ack_ = a_ack + i;
+				cur_ack_ = rcv_ack + i;
 				locked = true;
 			}
 		}
