@@ -2,3 +2,7 @@
 Library/
 
 Temp/
+
+build_Data/
+
+Assembly-CSharp\.csproj
