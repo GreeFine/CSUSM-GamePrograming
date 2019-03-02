@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Creep : MonoBehaviour, IAttackable
+public class Unit : MonoBehaviour, IAttackable
 {
   public bool hasAnimator = false;
   public int maxLife;
@@ -13,26 +13,25 @@ public class Creep : MonoBehaviour, IAttackable
 
   private int currentLife;
   private float atkReload = 0f;
-  private Vector3 enemy_nexus;
+  private Vector3 enemyNexus;
   private List<IAttackable> targets = new List<IAttackable>();
   private IAttackable currentTarget = null;
-  private bool isBuilding = true; //FIXME:
-  private uint owner = checked(0);
+
+  private int pidOwner = -1;
 
   private void Awake()
   {
     NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
-    agent.SetDestination(enemy_nexus);
+    agent.SetDestination(enemyNexus);
     ChangeAnimation("Run");
   }
 
-  public void Init(uint p_owner, Vector3 p_start_pos, Vector3 p_enemy_nexus)
+  public void Init(int pPidOwner, Vector3 pStartPos, Vector3 pEnemyNexus)
   {
-    isBuilding = false;
-    owner = p_owner;
-    this.gameObject.layer = 9 + (int)owner;
-    this.transform.position = p_start_pos;
-    enemy_nexus = p_enemy_nexus;
+    pidOwner = pPidOwner;
+    this.gameObject.layer = 9 + pidOwner;
+    this.transform.position = pStartPos;
+    enemyNexus = pEnemyNexus;
     currentLife = maxLife;
   }
 
@@ -59,7 +58,7 @@ public class Creep : MonoBehaviour, IAttackable
     if (currentTarget == null)
     {
       ChangeAnimation("Run");
-      GetComponent<NavMeshAgent>().destination = enemy_nexus;
+      GetComponent<NavMeshAgent>().destination = enemyNexus;
       GetComponent<NavMeshAgent>().isStopped = false;
       return;
     }
@@ -71,13 +70,11 @@ public class Creep : MonoBehaviour, IAttackable
     GetComponent<NavMeshAgent>().isStopped = true;
     ChangeAnimation("Attack");
     atkReload = atkSpeed;
-    currentTarget.ReceiveDamage(atkDmg); //Should have a warm-up time
+    currentTarget.ReceiveDamage(atkDmg); //TODO: Should have a warm-up time
   }
 
   public void Update()
   {
-    if (isBuilding)
-      return;
     atkReload -= Time.deltaTime;
     if (atkReload <= 0)
     {
