@@ -1,0 +1,7 @@
+~ The Rogue ~
+
+Tempo: 125 bpm
+Time Signature: 4/4
+Bar Duration: 1.92s / 1920ms
+
+Some track parts are padded to allow easier placing of parts in correct musical time. Parts are exported to the nearest silent bar, the information above can be used to snap parts to a musical grid.
