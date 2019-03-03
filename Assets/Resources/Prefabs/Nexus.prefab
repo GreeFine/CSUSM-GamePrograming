@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 536126906}
   - component: {fileID: 1769442639645573752}
   m_Layer: 10
-  m_Name: Player2Nexus
+  m_Name: Nexus
   m_TagString: AtkBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,13 +79,13 @@ Transform:
   m_GameObject: {fileID: 536126905}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -25.84011, y: 0, z: -0.38547286}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.4424787, y: 0.61946994, z: 0.4424787}
   m_Children:
   - {fileID: 742854480}
   - {fileID: 103519311}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &536126906
 BoxCollider:
   m_ObjectHideFlags: 0
