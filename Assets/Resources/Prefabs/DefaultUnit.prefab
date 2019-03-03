@@ -1321,7 +1321,7 @@ GameObject:
   - component: {fileID: 152}
   - component: {fileID: 154}
   m_Layer: 9
-  m_Name: DefaultCreep
+  m_Name: DefaultUnit
   m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1360,6 +1360,7 @@ MonoBehaviour:
   atkDmg: 1
   atkRange: 2
   atkSpeed: 2
+  atkWindUp: 1.1
 --- !u!135 &148
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -8,139 +8,144 @@ using UnityEngine.AI;
 
 public class Unit : NetworkBehaviour, IAttackable
 {
-  public bool hasAnimator = false;
-  public int maxLife;
-  public int atkDmg;
-  public float atkRange;
-  public float atkSpeed;
+    public bool hasAnimator = false;
+    public int maxLife;
+    public int atkDmg;
+    public float atkRange;
+    public float atkSpeed;
+    public float atkWindUp;
+    
+    private int currentLife;
+    private float atkReload = 0f;
+    private Vector3 enemyNexus;
+    private List<GameObject> targets = new List<GameObject>();
+    private GameObject currentTarget = null;
+    private bool isDead = false;
+    private int pidOwner = -9;
 
-  private int currentLife;
-  private float atkReload = 0f;
-  private Vector3 enemyNexus;
-  private List<GameObject> targets = new List<GameObject>();
-  private GameObject currentTarget = null;
-  private bool isDead = false;
-  private int pidOwner = -9;
 
-
-  private void Start()
-  {
-    NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
-    agent.SetDestination(enemyNexus);
-    ChangeAnimation("Run");
-  }
-
-  [ClientRpc]
-  public void RpcInit(int pPidOwner, Vector3 pStartPos, Vector3 pEnemyNexus)
-  {
-    Debug.Log(pPidOwner);
-    pidOwner = pPidOwner;
-    this.gameObject.layer = 9 + pidOwner;
-    this.transform.position = pStartPos;
-    enemyNexus = pEnemyNexus;
-    currentLife = maxLife;
-  }
-
-  public void SetDestination(Vector3 dest)
-  {
-    GetComponent<NavMeshAgent>().SetDestination(dest);
-  }
-
-  private void ChooseTarget()
-  {
-    int count = targets.Count;
-    int i = 0;
-    while (i < count && targets[i] == null)
+    private void Start()
     {
-      targets.RemoveAt(i);
-      i++;
+        NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
+        agent.SetDestination(enemyNexus);
+        ChangeAnimation("Run");
     }
-    if (targets.Count <= 0)
+
+    [ClientRpc]
+    public void RpcInit(int pPidOwner, Vector3 pStartPos, Vector3 pEnemyNexus)
     {
-      currentTarget = null;
-      return;
+        pidOwner = pPidOwner;
+        this.gameObject.layer = 9 + pidOwner;
+        this.transform.position = pStartPos;
+        enemyNexus = pEnemyNexus;
+        currentLife = maxLife;
     }
-    targets.Sort(SortByDistance);
-    currentTarget = targets[0];
-  }
 
-  private void Attack()
-  {
-    if (currentTarget == null)
+    public void SetDestination(Vector3 dest)
     {
-      ChangeAnimation("Run");
-      GetComponent<NavMeshAgent>().destination = enemyNexus;
-      GetComponent<NavMeshAgent>().isStopped = false;
-      return;
+        GetComponent<NavMeshAgent>().SetDestination(dest);
     }
-    if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > atkRange)
+
+    private void Update()
     {
-      GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
-      return;
+        atkReload -= Time.deltaTime;
+        if (atkReload <= 0)
+        {
+            if (currentTarget == null && targets.Count > 0)
+                ChooseTarget();
+            Attack();
+        }
     }
-    GetComponent<NavMeshAgent>().isStopped = true;
-    ChangeAnimation("Attack");
-    atkReload = atkSpeed;
-    currentTarget.GetComponent<IAttackable>().ReceiveDamage(atkDmg); //TODO: Should have a warm-up time
-  }
 
-  private void Update()
-  {
-    Debug.Log(pidOwner);
-
-    atkReload -= Time.deltaTime;
-    if (atkReload <= 0)
+    private void LateUpdate()
     {
-      if (currentTarget == null && targets.Count > 0)
-        ChooseTarget();
-      Attack();
+        if (isDead)
+            Destroy(this.gameObject);
     }
-  }
 
-  private void LateUpdate()
-  {
-    if (isDead)
-      Destroy(this.gameObject);
-  }
+    private void ChooseTarget()
+    {
+        int count = targets.Count;
+        int i = 0;
+        while (i < count && targets[i] == null)
+        {
+            targets.RemoveAt(i);
+            i++;
+        }
+        if (targets.Count <= 0)
+        {
+            currentTarget = null;
+            return;
+        }
+        targets.Sort(SortByDistance);
+        currentTarget = targets[0];
+    }
 
-  private void ChangeAnimation(string name)
-  {
-    if (hasAnimator)
-      GetComponent<Animator>().SetBool(name, true);
-    else
-      GetComponent<Animation>().Play(name);
-  }
+    private void Attack()
+    {
+        if (currentTarget == null)
+        {
+            ChangeAnimation("Run");
+            GetComponent<NavMeshAgent>().destination = enemyNexus;
+            GetComponent<NavMeshAgent>().isStopped = false;
+            return;
+        }
+        if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > atkRange)
+        {
+            GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
+            return;
+        }
+        GetComponent<NavMeshAgent>().isStopped = true;
+        atkReload = atkSpeed;
+        ChangeAnimation("Attack");
+        StartCoroutine(AtkWindUpComplete(atkWindUp, currentTarget));
+    }
 
-  private void OnTriggerEnter(Collider other)
-  {
-    IAttackable tmp = other.GetComponent<IAttackable>();
-    if (tmp != null)
-      targets.Add(other.gameObject);
-  }
+    private IEnumerator AtkWindUpComplete(float time, GameObject target)
+    {
+        yield return new WaitForSeconds(time);
+        if (target != null)
+            target.GetComponent<IAttackable>().ReceiveDamage(atkDmg);
+    }
 
-  private void OnTriggerExit(Collider other)
-  {
-    IAttackable tmp = other.GetComponent<IAttackable>();
-    if (tmp != null)
-      targets.Remove(other.gameObject);
-  }
+    private void ChangeAnimation(string name)
+    {
+        if (hasAnimator)
+            GetComponent<Animator>().SetBool(name, true);
+        else
+            GetComponent<Animation>().Play(name);
+    }
 
-  private int SortByDistance(GameObject a, GameObject b)
-  {
-    return ((this.transform.position - a.transform.position).sqrMagnitude.CompareTo((this.transform.position - b.transform.position).sqrMagnitude));
-  }
+    private void OnTriggerEnter(Collider other)
+    {
+        IAttackable tmp = other.GetComponent<IAttackable>();
+        if (tmp != null)
+            targets.Add(other.gameObject);
+    }
 
-  //Interface : IAttackable
-  public Vector3 GetPosition() { return this.transform.position; }
-  public void ReceiveDamage(int damage)
-  {
-    currentLife -= damage;
-    if (currentLife <= 0)
-      isDead = true;
-  }
+    private void OnTriggerExit(Collider other)
+    {
+        IAttackable tmp = other.GetComponent<IAttackable>();
+        if (tmp != null)
+            targets.Remove(other.gameObject);
+    }
 
-  public GameObject GetGameObject()
-  {
-    return this.gameObject;
-  }
+    private int SortByDistance(GameObject a, GameObject b)
+    {
+        return ((this.transform.position - a.transform.position).sqrMagnitude.CompareTo((this.transform.position - b.transform.position).sqrMagnitude));
+    }
+
+    //Interface : IAttackable
+    public Vector3 GetPosition() { return this.transform.position; }
+    public void ReceiveDamage(int damage)
+    {
+        currentLife -= damage;
+        if (currentLife <= 0)
+            isDead = true;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return this.gameObject;
+    }
 }

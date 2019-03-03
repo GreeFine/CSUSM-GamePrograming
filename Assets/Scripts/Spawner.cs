@@ -12,12 +12,10 @@ public class Spawner : NetworkBehaviour
 
   public void SpawnUnit(int playerId, string creepName)
   {
-    Debug.Log(GameRule.instance.unitList[creepName]);
     Unit tmp = Instantiate(GameRule.instance.unitList[creepName], transform.position, transform.rotation);
     NetworkServer.Spawn(tmp.gameObject);
     tmp.RpcInit(playerId, transform.position, enemyNexus.transform.position);
     unitsActive.Add(tmp);
-    Debug.Log("Creep added" + unitsCreated.Count.ToString());
   }
 
   private void FixedUpdate()

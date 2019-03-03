@@ -15,7 +15,6 @@ public class PlayerController : NetworkBehaviour
       pid = 0;
     else
       pid = 1;
-    Debug.Log("Player spawned:" + pid);
     spawner = GameRule.instance.spawners[pid];
     CmdInit(pid);
     // spawner.transform.parent = this.transform;
@@ -26,9 +25,7 @@ public class PlayerController : NetworkBehaviour
   public void CmdInit(int pPid)
   {
     pid = pPid;
-    Debug.Log(pid);
     spawner = GameRule.instance.spawners[pid];
-    Debug.Log(spawner);
   }
 
   [Command]
