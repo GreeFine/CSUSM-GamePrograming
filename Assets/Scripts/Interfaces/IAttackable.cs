@@ -6,5 +6,6 @@ public interface IAttackable
 {
   Vector3 GetPosition();
 
+  GameObject GetGameObject();
   void ReceiveDamage(int damage);
 }

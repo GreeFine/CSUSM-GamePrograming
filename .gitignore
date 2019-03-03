@@ -6,3 +6,7 @@ Temp/
 build_Data/
 
 Assembly-CSharp\.csproj
+
+obj/Debug/
+
+CSUSM-GamePrograming\.sln

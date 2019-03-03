@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 392957474}
   - component: {fileID: 392957473}
   - component: {fileID: 392957472}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BaseP1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 519680410}
   - component: {fileID: 519680411}
   - component: {fileID: 519680412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpawnerP1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 1140855020}
   - component: {fileID: 1140855019}
   - component: {fileID: 1140855018}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BaseP2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 1281224073}
   - component: {fileID: 1281224071}
   - component: {fileID: 1281224072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpawnerP2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!4 &1281224073
 Transform:
   m_ObjectHideFlags: 0
@@ -892,8 +892,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 9140660916299084150, guid: fdd3df2b76c23b0eba889f4b81734d87,
-    type: 3}
+  m_PlayerPrefab: {fileID: 89, guid: fdd3df2b76c23b0eba889f4b81734d87, type: 3}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 

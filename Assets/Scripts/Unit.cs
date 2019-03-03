@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.AI;
 
-public class Unit : MonoBehaviour, IAttackable
+
+
+public class Unit : NetworkBehaviour, IAttackable
 {
   public bool hasAnimator = false;
   public int maxLife;
@@ -14,20 +17,23 @@ public class Unit : MonoBehaviour, IAttackable
   private int currentLife;
   private float atkReload = 0f;
   private Vector3 enemyNexus;
-  private List<IAttackable> targets = new List<IAttackable>();
-  private IAttackable currentTarget = null;
+  private List<GameObject> targets = new List<GameObject>();
+  private GameObject currentTarget = null;
+  private bool isDead = false;
+  private int pidOwner = -9;
 
-  private int pidOwner = -1;
 
-  private void Awake()
+  private void Start()
   {
     NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
     agent.SetDestination(enemyNexus);
     ChangeAnimation("Run");
   }
 
-  public void Init(int pPidOwner, Vector3 pStartPos, Vector3 pEnemyNexus)
+  [ClientRpc]
+  public void RpcInit(int pPidOwner, Vector3 pStartPos, Vector3 pEnemyNexus)
   {
+    Debug.Log(pPidOwner);
     pidOwner = pPidOwner;
     this.gameObject.layer = 9 + pidOwner;
     this.transform.position = pStartPos;
@@ -49,6 +55,11 @@ public class Unit : MonoBehaviour, IAttackable
       targets.RemoveAt(i);
       i++;
     }
+    if (targets.Count <= 0)
+    {
+      currentTarget = null;
+      return;
+    }
     targets.Sort(SortByDistance);
     currentTarget = targets[0];
   }
@@ -62,19 +73,21 @@ public class Unit : MonoBehaviour, IAttackable
       GetComponent<NavMeshAgent>().isStopped = false;
       return;
     }
-    if (Vector3.Distance(this.transform.position, currentTarget.GetPosition()) > atkRange)
+    if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > atkRange)
     {
-      GetComponent<NavMeshAgent>().destination = currentTarget.GetPosition();
+      GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
       return;
     }
     GetComponent<NavMeshAgent>().isStopped = true;
     ChangeAnimation("Attack");
     atkReload = atkSpeed;
-    currentTarget.ReceiveDamage(atkDmg); //TODO: Should have a warm-up time
+    currentTarget.GetComponent<IAttackable>().ReceiveDamage(atkDmg); //TODO: Should have a warm-up time
   }
 
-  public void Update()
+  private void Update()
   {
+    Debug.Log(pidOwner);
+
     atkReload -= Time.deltaTime;
     if (atkReload <= 0)
     {
@@ -82,6 +95,12 @@ public class Unit : MonoBehaviour, IAttackable
         ChooseTarget();
       Attack();
     }
+  }
+
+  private void LateUpdate()
+  {
+    if (isDead)
+      Destroy(this.gameObject);
   }
 
   private void ChangeAnimation(string name)
@@ -96,19 +115,19 @@ public class Unit : MonoBehaviour, IAttackable
   {
     IAttackable tmp = other.GetComponent<IAttackable>();
     if (tmp != null)
-      targets.Add(tmp);
+      targets.Add(other.gameObject);
   }
 
   private void OnTriggerExit(Collider other)
   {
     IAttackable tmp = other.GetComponent<IAttackable>();
     if (tmp != null)
-      targets.Remove(tmp);
+      targets.Remove(other.gameObject);
   }
 
-  private int SortByDistance(IAttackable a, IAttackable b)
+  private int SortByDistance(GameObject a, GameObject b)
   {
-    return ((this.transform.position - a.GetPosition()).sqrMagnitude.CompareTo((this.transform.position - b.GetPosition()).sqrMagnitude));
+    return ((this.transform.position - a.transform.position).sqrMagnitude.CompareTo((this.transform.position - b.transform.position).sqrMagnitude));
   }
 
   //Interface : IAttackable
@@ -117,6 +136,11 @@ public class Unit : MonoBehaviour, IAttackable
   {
     currentLife -= damage;
     if (currentLife <= 0)
-      Destroy(this.gameObject);
+      isDead = true;
+  }
+
+  public GameObject GetGameObject()
+  {
+    return this.gameObject;
   }
 }

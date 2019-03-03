@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Nexus : MonoBehaviour, IAttackable
 {
-    public Vector3 GetPosition() { return this.transform.position; }
+  public Vector3 GetPosition() { return this.transform.position; }
 
-    public void ReceiveDamage(int dmg)
-    {
-        //TODO
-        Debug.Log("Receive " + dmg.ToString() + " damage");
-    }
+  public void ReceiveDamage(int dmg)
+  {
+    //TODO
+    Debug.Log("Receive " + dmg.ToString() + " damage");
+  }
+
+  public GameObject GetGameObject()
+  {
+    return this.gameObject;
+  }
 }
