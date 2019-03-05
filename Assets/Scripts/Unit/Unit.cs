@@ -7,26 +7,16 @@ using UnityEngine.UI;
 
 public class Unit : NetworkBehaviour, IAttackable
 {
-    //TODO : struct to organise variables
     public bool hasAnimator = false;
     public Image healthBar;
-    public int maxLife;
-    public int atkDmg;
-    public float atkRange;
-    public float atkSpeed;
-    public float animDmgTime;
+    public UnitStats stats;
 
     private int pidOwner = -9;
-    private int currentLife;
-    private float atkReload = 0f;
-    private float modifierAS = 1f; //TODO : implem AS buff/debuff setter
-    private float modifierMS = 1f; //TODO : implem unit speed + animation
     private bool isAttacking = false;
     private Vector3 enemyNexus;
     private List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget = null;
     private bool isDead = false;
-    
 
     private void Start()
     {
@@ -42,12 +32,15 @@ public class Unit : NetworkBehaviour, IAttackable
         this.gameObject.layer = 9 + pidOwner;
         this.transform.position = pStartPos;
         enemyNexus = pEnemyNexus;
-        currentLife = maxLife;
+        stats.currentHealth = stats.maxHealth;
         if (pPidOwner == 1)
         {
             healthBar.GetComponentInParent<Canvas>().GetComponent<RectTransform>().Rotate(new Vector3(1, 0, 0), -90);
             healthBar.fillOrigin = 0;
         }
+        stats.modifierMS = 1f;//TODO
+        stats.modifierAS = 1f;//TODO
+
     }
 
     public void SetDestination(Vector3 dest)
@@ -57,8 +50,8 @@ public class Unit : NetworkBehaviour, IAttackable
 
     private void Update()
     {
-        atkReload -= Time.deltaTime;
-        if (atkReload <= 0)
+        stats.atkReload -= Time.deltaTime;
+        if (stats.atkReload <= 0)
         {
             if (isAttacking)
                 ChangeAnimation("Idle");
@@ -102,7 +95,7 @@ public class Unit : NetworkBehaviour, IAttackable
             GetComponent<NavMeshAgent>().isStopped = false;
             return;
         }
-        if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > atkRange)
+        if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > stats.atkRange)
         {
             isAttacking = false;
             GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
@@ -110,16 +103,16 @@ public class Unit : NetworkBehaviour, IAttackable
         }
         isAttacking = true;
         GetComponent<NavMeshAgent>().isStopped = true;
-        atkReload = atkSpeed * modifierAS;
-        ChangeAnimation("Attack", atkSpeed * modifierAS);
-        StartCoroutine(AtkWindUpComplete(animDmgTime * modifierAS, currentTarget));
+        stats.atkReload = stats.atkSpeed * stats.modifierAS;
+        ChangeAnimation("Attack", stats.atkSpeed * stats.modifierAS);
+        StartCoroutine(AtkWindUpComplete(stats.animDmgTime * stats.modifierAS, currentTarget));
     }
 
     private IEnumerator AtkWindUpComplete(float time, GameObject target)
     {
         yield return new WaitForSeconds(time);
         if (target != null)
-            target.GetComponent<IAttackable>().ReceiveDamage(atkDmg);
+            target.GetComponent<IAttackable>().ReceiveDamage(stats.atkDmg);
         yield return null;
     }
 
@@ -165,11 +158,11 @@ public class Unit : NetworkBehaviour, IAttackable
     public Vector3 GetPosition() { return this.transform.position; }
     public void ReceiveDamage(int damage)
     {
-        currentLife -= damage;
-        if (currentLife <= 0)
+        stats.currentHealth -= damage;
+        if (stats.currentHealth <= 0)
             isDead = true;
         else
-        healthBar.fillAmount = (float)currentLife / (float)maxLife;
+        healthBar.fillAmount = (float)stats.currentHealth / (float)stats.maxHealth;
     }
 
     public GameObject GetGameObject()

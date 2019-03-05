@@ -1358,11 +1358,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasAnimator: 0
   healthBar: {fileID: 3040393151880672222}
-  maxLife: 10
-  atkDmg: 1
-  atkRange: 4
-  atkSpeed: 2
-  animDmgTime: 1
+  stats:
+    maxHealth: 10
+    atkDmg: 1
+    atkRange: 3
+    atkSpeed: 2
+    animDmgTime: 1.2
+    currentHealth: 0
+    atkReload: 0
+    modifierAS: 0
+    modifierMS: 0
 --- !u!135 &148
 SphereCollider:
   m_ObjectHideFlags: 0
