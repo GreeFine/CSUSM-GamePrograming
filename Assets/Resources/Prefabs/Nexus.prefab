@@ -63,8 +63,9 @@ GameObject:
   - component: {fileID: 536126907}
   - component: {fileID: 536126906}
   - component: {fileID: 1769442639645573752}
+  - component: {fileID: 8372712241938100555}
   m_Layer: 10
-  m_Name: Player2Nexus
+  m_Name: Nexus
   m_TagString: AtkBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,6 +112,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa09506883193749ab5a0c1bbb674d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &8372712241938100555
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536126905}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 5, z: 2.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 3, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &742854479
 GameObject:
   m_ObjectHideFlags: 0
