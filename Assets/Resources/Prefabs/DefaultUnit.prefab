@@ -1360,6 +1360,7 @@ MonoBehaviour:
   healthBar: {fileID: 3040393151880672222}
   stats:
     maxHealth: 10
+    moveSpeed: 3.5
     atkDmg: 1
     atkRange: 3
     atkSpeed: 2
@@ -1948,11 +1949,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 139}
     m_Modifications:
-    - target: {fileID: 6466557350980912945, guid: 606e38753710ecd459ccd795fca9052b,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
-      objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2072,6 +2068,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6466557350980912945, guid: 606e38753710ecd459ccd795fca9052b,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}

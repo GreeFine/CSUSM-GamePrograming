@@ -20,9 +20,12 @@ public class Unit : NetworkBehaviour, IAttackable
 
     private void Start()
     {
+        stats.modifierAS = 1f;
+        stats.modifierMS = 1f;
         NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
         agent.SetDestination(enemyNexus);
-        ChangeAnimation("Run");
+        agent.speed = stats.moveSpeed * stats.modifierMS;
+        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * stats.modifierMS);
     }
 
     [ClientRpc]
@@ -38,16 +41,15 @@ public class Unit : NetworkBehaviour, IAttackable
             healthBar.GetComponentInParent<Canvas>().GetComponent<RectTransform>().Rotate(new Vector3(1, 0, 0), -90);
             healthBar.fillOrigin = 0;
         }
-        stats.modifierMS = 1f;//TODO
-        stats.modifierAS = 1f;//TODO
-
+        stats.modifierMS = 1f;
+        stats.modifierAS = 1f;
     }
 
     public void SetDestination(Vector3 dest)
     {
         GetComponent<NavMeshAgent>().SetDestination(dest);
     }
-
+    
     private void Update()
     {
         stats.atkReload -= Time.deltaTime;
@@ -67,6 +69,8 @@ public class Unit : NetworkBehaviour, IAttackable
             Destroy(this.gameObject);
     }
 
+
+    //Attack
     private void ChooseTarget()
     {
         int count = targets.Count;
@@ -85,12 +89,17 @@ public class Unit : NetworkBehaviour, IAttackable
         currentTarget = targets[0];
     }
 
+    private int SortByDistance(GameObject a, GameObject b)
+    {
+        return ((this.transform.position - a.transform.position).sqrMagnitude.CompareTo((this.transform.position - b.transform.position).sqrMagnitude));
+    }
+
     private void Attack()
     {
         if (currentTarget == null)
         {
             isAttacking = false;
-            ChangeAnimation("Run");
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * stats.modifierMS);
             GetComponent<NavMeshAgent>().destination = enemyNexus;
             GetComponent<NavMeshAgent>().isStopped = false;
             return;
@@ -108,6 +117,7 @@ public class Unit : NetworkBehaviour, IAttackable
         StartCoroutine(AtkWindUpComplete(stats.animDmgTime * stats.modifierAS, currentTarget));
     }
 
+    //Animation
     private IEnumerator AtkWindUpComplete(float time, GameObject target)
     {
         yield return new WaitForSeconds(time);
@@ -135,6 +145,8 @@ public class Unit : NetworkBehaviour, IAttackable
         }
     }
 
+
+    //Triggers
     private void OnTriggerEnter(Collider other)
     {
         IAttackable tmp = other.GetComponent<IAttackable>();
@@ -149,10 +161,6 @@ public class Unit : NetworkBehaviour, IAttackable
             targets.Remove(other.gameObject);
     }
 
-    private int SortByDistance(GameObject a, GameObject b)
-    {
-        return ((this.transform.position - a.transform.position).sqrMagnitude.CompareTo((this.transform.position - b.transform.position).sqrMagnitude));
-    }
 
     //Interface : IAttackable
     public Vector3 GetPosition() { return this.transform.position; }

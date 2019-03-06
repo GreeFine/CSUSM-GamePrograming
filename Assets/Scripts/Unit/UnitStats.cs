@@ -6,6 +6,7 @@ using UnityEngine;
 public struct UnitStats
 {
     public int maxHealth;
+    public float moveSpeed;
     public int atkDmg;
     public float atkRange;
     public float atkSpeed;
