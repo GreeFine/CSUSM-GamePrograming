@@ -1,31 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class Unit : NetworkBehaviour, IAttackable
+public class Unit : AAttacker, IAttackable
 {
-    public bool hasAnimator = false;
+    public bool hasAnimator;
     public Image healthBar;
-    public UnitStats stats;
+    public int maxHealth;
+    public float moveSpeed;
+    public float animDmgTime;
 
-    private int pidOwner = -9;
-    private bool isAttacking = false;
-    private Vector3 enemyNexus;
-    private List<GameObject> targets = new List<GameObject>();
-    private GameObject currentTarget = null;
-    private bool isDead = false;
+    protected int pidOwner = -9;
+    protected Vector3 enemyNexus;
+    protected bool isDead = false;
+    protected int currentHealth;
+    protected float modifierMS = 1f;
 
     private void Start()
     {
-        stats.modifierAS = 1f;
-        stats.modifierMS = 1f;
         NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
         agent.SetDestination(enemyNexus);
-        agent.speed = stats.moveSpeed * stats.modifierMS;
-        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * stats.modifierMS);
+        agent.speed = moveSpeed * modifierMS;
+        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
     }
 
     [ClientRpc]
@@ -35,32 +34,14 @@ public class Unit : NetworkBehaviour, IAttackable
         this.gameObject.layer = 9 + pidOwner;
         this.transform.position = pStartPos;
         enemyNexus = pEnemyNexus;
-        stats.currentHealth = stats.maxHealth;
+        currentHealth = maxHealth;
         if (pPidOwner == 1)
         {
             healthBar.GetComponentInParent<Canvas>().GetComponent<RectTransform>().Rotate(new Vector3(1, 0, 0), -90);
             healthBar.fillOrigin = 0;
         }
-        stats.modifierMS = 1f;
-        stats.modifierAS = 1f;
-    }
-
-    public void SetDestination(Vector3 dest)
-    {
-        GetComponent<NavMeshAgent>().SetDestination(dest);
-    }
-    
-    private void Update()
-    {
-        stats.atkReload -= Time.deltaTime;
-        if (stats.atkReload <= 0)
-        {
-            if (isAttacking)
-                ChangeAnimation("Idle");
-            if (currentTarget == null && targets.Count > 0)
-                ChooseTarget();
-            Attack();
-        }
+        modifierMS = 1f;
+        modifierAS = 1f;
     }
 
     private void LateUpdate()
@@ -69,52 +50,30 @@ public class Unit : NetworkBehaviour, IAttackable
             Destroy(this.gameObject);
     }
 
-
-    //Attack
-    private void ChooseTarget()
+    protected override void Cancel()
     {
-        int count = targets.Count;
-        int i = 0;
-        while (i < count && targets[i] == null)
-        {
-            targets.RemoveAt(i);
-            i++;
-        }
-        if (targets.Count <= 0)
-        {
-            currentTarget = null;
-            return;
-        }
-        targets.Sort(SortByDistance);
-        currentTarget = targets[0];
+        ChangeAnimation("Idle");
     }
 
-    private int SortByDistance(GameObject a, GameObject b)
+    protected override void NoTargets()
     {
-        return ((this.transform.position - a.transform.position).sqrMagnitude.CompareTo((this.transform.position - b.transform.position).sqrMagnitude));
+        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        GetComponent<NavMeshAgent>().destination = enemyNexus;
+        GetComponent<NavMeshAgent>().isStopped = false;
     }
 
-    private void Attack()
+    protected override void TargetNotInRange()
     {
-        if (currentTarget == null)
-        {
-            isAttacking = false;
-            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * stats.modifierMS);
-            GetComponent<NavMeshAgent>().destination = enemyNexus;
-            GetComponent<NavMeshAgent>().isStopped = false;
-            return;
-        }
-        if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > stats.atkRange)
-        {
-            isAttacking = false;
-            GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
-            return;
-        }
-        isAttacking = true;
+        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
+    }
+
+    protected override void LaunchAttack()
+    {
         GetComponent<NavMeshAgent>().isStopped = true;
-        stats.atkReload = stats.atkSpeed * stats.modifierAS;
-        ChangeAnimation("Attack", stats.atkSpeed * stats.modifierAS);
-        StartCoroutine(AtkWindUpComplete(stats.animDmgTime * stats.modifierAS, currentTarget));
+        atkReload = atkSpeed * modifierAS;
+        ChangeAnimation("Attack", atkSpeed * modifierAS);
+        StartCoroutine(AtkWindUpComplete(animDmgTime * modifierAS, currentTarget));
     }
 
     //Animation
@@ -122,7 +81,7 @@ public class Unit : NetworkBehaviour, IAttackable
     {
         yield return new WaitForSeconds(time);
         if (target != null)
-            target.GetComponent<IAttackable>().ReceiveDamage(stats.atkDmg);
+            target.GetComponent<IAttackable>().ReceiveDamage(atkDmg);
         yield return null;
     }
 
@@ -145,32 +104,18 @@ public class Unit : NetworkBehaviour, IAttackable
         }
     }
 
-
-    //Triggers
-    private void OnTriggerEnter(Collider other)
-    {
-        IAttackable tmp = other.GetComponent<IAttackable>();
-        if (tmp != null)
-            targets.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IAttackable tmp = other.GetComponent<IAttackable>();
-        if (tmp != null)
-            targets.Remove(other.gameObject);
-    }
-
-
     //Interface : IAttackable
     public Vector3 GetPosition() { return this.transform.position; }
-    public void ReceiveDamage(int damage)
+    public bool ReceiveDamage(int damage)
     {
-        stats.currentHealth -= damage;
-        if (stats.currentHealth <= 0)
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
             isDead = true;
-        else
-        healthBar.fillAmount = (float)stats.currentHealth / (float)stats.maxHealth;
+            return true;
+        }
+        healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+        return false;
     }
 
     public GameObject GetGameObject()
