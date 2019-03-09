@@ -1340,7 +1340,7 @@ Transform:
   m_Children:
   - {fileID: 94}
   - {fileID: 95}
-  - {fileID: 8794352384366914932}
+  - {fileID: 8794352384366914895}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   atkRange: 3
   atkSpeed: 2
   hasAnimator: 0
-  healthBar: {fileID: 8794352384366914890}
+  healthBar: {fileID: 8794352384366914905}
   maxHealth: 10
   moveSpeed: 3
   animDmgTime: 1
@@ -1944,6 +1944,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 139}
     m_Modifications:
+    - target: {fileID: 6466557350980912945, guid: 606e38753710ecd459ccd795fca9052b,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1962,22 +1967,22 @@ PrefabInstance:
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.27059805
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6532815
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.27059805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6532815
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
@@ -1987,12 +1992,12 @@ PrefabInstance:
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -45
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
@@ -2064,20 +2069,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6466557350980912945, guid: 606e38753710ecd459ccd795fca9052b,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &8794352384366914932 stripped
+--- !u!224 &8794352384366914895 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 8794352384366915048}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8794352384366914890 stripped
+--- !u!114 &8794352384366914905 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
