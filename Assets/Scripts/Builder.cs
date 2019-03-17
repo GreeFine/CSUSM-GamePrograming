@@ -1,24 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Builder : MonoBehaviour
+public class Builder : NetworkBehaviour
 {
-  public Camera camera;
-  public int pId = 1;//TODO : SETME
-  public Building[] availableBuildings = new Building[1];
 
   private bool positioning = false;
   private Building ghost = null;
   private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
   private Vector3 lastValidPos = Vector3.zero;
-  private int layer;
+  private Camera camera;
+  private Spawner spawner = null;
+  private int pId = -7;
 
   private void Start()
   {
+    if (isServer)
+      pId = 1;//FIXME: temporary
+    else
+      pId = 0;
     camera = GameRule.instance.gameObject.GetComponent<Camera>();
-    layer = 1 << (9 + pId);
+    spawner = GameRule.instance.spawners[pId];
   }
+
+
 
   public bool MouseRayCast(out Vector3 pos)
   {
@@ -44,25 +50,33 @@ public class Builder : MonoBehaviour
       if (ghost != null)
         Destroy(ghost);
       positioning = true;
-      ghost = Instantiate(availableBuildings[0], this.transform);
+      ghost = Instantiate(GameRule.instance.buildingMap["default"], this.transform);
     }
 
     if (positioning)
     {
       Vector3 pos;
       if (MouseRayCast(out pos))
-      {
-        Debug.Log(pos);
         ghost.transform.position = pos;
+
+      if (Input.GetMouseButtonDown(0))
+      {
+        positioning = false;
+        Destroy(ghost);
+        ghost = null;
+        CmdPlaceNewBuilding(pId, "default", pos);
       }
     }
+  }
 
-    if (Input.GetMouseButtonDown(0) && positioning)
-    {
-      positioning = false;
-      ghost.Init();
-      ghost = null;
-    }
-
+  [Command]
+  private void CmdPlaceNewBuilding(int pId, string buildingName, Vector3 pos)
+  {
+    Quaternion quaternion = new Quaternion(0, 0, 0, 0); //FIXME: depend on player side
+    Building tmp = Instantiate(GameRule.instance.buildingMap[buildingName], pos, quaternion);
+    pos.x += Mathf.Abs(spawner.transform.position.x - this.GetComponentInParent<Transform>().position.x);
+    spawner.placedUnits.Add((pId, buildingName, pos));
+    NetworkServer.Spawn(tmp.gameObject);
+    tmp.Init();
   }
 }
