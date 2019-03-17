@@ -10,16 +10,11 @@ public class Builder : NetworkBehaviour
   private Building ghost = null;
   private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
   private Vector3 lastValidPos = Vector3.zero;
-  private Spawner spawner = null;
 
   private void Start()
   {
     if (!isLocalPlayer)
-    {
       this.enabled = false;
-      return;
-    }
-    spawner = GameRule.instance.playerBase[PlayerController.pId].GetComponentInChildren<Spawner>();
   }
 
   public bool MouseRayCast(out Vector3 pos)
@@ -46,7 +41,8 @@ public class Builder : NetworkBehaviour
       if (ghost != null)
         Destroy(ghost);
       positioning = true;
-      ghost = Instantiate(GameRule.instance.buildingMap["default"], this.transform);
+      Quaternion quaternion = new Quaternion(0, PlayerController.pId * 180, 0, 0);
+      ghost = Instantiate(GameRule.instance.buildingMap["default"], this.transform.position, quaternion);
     }
 
     if (positioning)
@@ -60,7 +56,6 @@ public class Builder : NetworkBehaviour
         positioning = false;
         Destroy(ghost);
         ghost = null;
-        Debug.Log("2 times ?");
         CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
       }
     }
@@ -69,11 +64,11 @@ public class Builder : NetworkBehaviour
   [Command]
   private void CmdPlaceNewBuilding(int pId, string buildingName, Vector3 pos)
   {
-    Quaternion quaternion = new Quaternion(0, 0, 0, 0); //FIXME: depend on player side
+    Spawner spawner = GameRule.instance.playerBase[pId].GetComponentInChildren<Spawner>();
+    Quaternion quaternion = new Quaternion(0, pId * 180, 0, 0); //FIXME: depend on player side
     Building tmp = Instantiate(GameRule.instance.buildingMap[buildingName], pos, quaternion);
-    pos.x += Mathf.Abs(spawner.transform.localPosition.x - this.transform.position.x);
+    pos.x += spawner.transform.localPosition.x - this.transform.localPosition.x;
     spawner.placedUnits.Add((pId, buildingName, pos));
-    Debug.Log("placed? ->" + "(" + spawner.placedUnits.Count + "):" + spawner.placedUnits);
     NetworkServer.Spawn(tmp.gameObject);
     tmp.Init();
   }
