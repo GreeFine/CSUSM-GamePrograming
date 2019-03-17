@@ -1,12 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     public float cameraSpeed = 50f;
+  private bool focused = true;
 
     void Update()
+    {
+    if (focused)
     {
         Vector3 updatedPosition = Vector3.zero;
 
@@ -21,4 +24,9 @@ public class CameraController : MonoBehaviour
 
         this.transform.position += updatedPosition;
     }
+}
+  void OnApplicationFocus(bool hasFocus)
+  {
+    focused = hasFocus;
+  }
 }
