@@ -10,32 +10,28 @@ public class Builder : NetworkBehaviour
   private Building ghost = null;
   private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
   private Vector3 lastValidPos = Vector3.zero;
-  private Camera camera;
   private Spawner spawner = null;
-  private int pId = -7;
 
   private void Start()
   {
-    if (isServer)
-      pId = 1;//FIXME: temporary
-    else
-      pId = 0;
-    camera = GameRule.instance.gameObject.GetComponent<Camera>();
-    spawner = GameRule.instance.spawners[pId];
+    if (!isLocalPlayer)
+    {
+      this.enabled = false;
+      return;
+    }
+    spawner = GameRule.instance.playerBase[PlayerController.pId].GetComponentInChildren<Spawner>();
   }
-
-
 
   public bool MouseRayCast(out Vector3 pos)
   {
     RaycastHit hit;
-    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     float rayDistance;
 
     if (groundPlane.Raycast(ray, out rayDistance)
        && Physics.Raycast(ray, out hit, rayDistance) && hit.collider.tag == "ConstructionArea")
     {
-      pos = camera.GetComponent<GridDisplay>().GetNearestPointOnGrid(ray.GetPoint(rayDistance));
+      pos = Camera.main.GetComponent<GridDisplay>().GetNearestPointOnGrid(ray.GetPoint(rayDistance));
       lastValidPos = pos;
       return true;
     }
@@ -64,7 +60,8 @@ public class Builder : NetworkBehaviour
         positioning = false;
         Destroy(ghost);
         ghost = null;
-        CmdPlaceNewBuilding(pId, "default", pos);
+        Debug.Log("2 times ?");
+        CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
       }
     }
   }
@@ -74,8 +71,9 @@ public class Builder : NetworkBehaviour
   {
     Quaternion quaternion = new Quaternion(0, 0, 0, 0); //FIXME: depend on player side
     Building tmp = Instantiate(GameRule.instance.buildingMap[buildingName], pos, quaternion);
-    pos.x += Mathf.Abs(spawner.transform.position.x - this.GetComponentInParent<Transform>().position.x);
+    pos.x += Mathf.Abs(spawner.transform.localPosition.x - this.transform.position.x);
     spawner.placedUnits.Add((pId, buildingName, pos));
+    Debug.Log("placed? ->" + "(" + spawner.placedUnits.Count + "):" + spawner.placedUnits);
     NetworkServer.Spawn(tmp.gameObject);
     tmp.Init();
   }

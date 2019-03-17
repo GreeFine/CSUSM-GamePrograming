@@ -13,13 +13,12 @@ public class GridDisplay : MonoBehaviour
   public Color lineColor = new Color(1f, 0f, 0f, 1f);
   public bool subActiv = false;
   public bool activ = true;
-  public GameObject origin;
 
   private Material lineMaterial;
-  private float startX;
   private float sizeX;
+  private float startX = -1;
   private float startY = 0.05f;
-  private float startZ;
+  private float startZ = -1;
   private float sizeZ;
 
   private void Start()
@@ -38,14 +37,20 @@ public class GridDisplay : MonoBehaviour
 
     sizeX = gridSizeX * 2;
     sizeZ = gridSizeZ * 2;
-    startX = origin.transform.position.x + (sizeX / -2f);
-    startZ = origin.transform.position.y + (sizeZ / -2f);
+  }
+
+  public void Init()
+  {
+    GameObject spawnArea = GameRule.instance.playerBase[PlayerController.pId];//FIXME: Building area not on 0,0 of Base ?
+    startX = spawnArea.transform.position.x + (sizeX / -2f);
+    startZ = spawnArea.transform.position.y + (sizeZ / -2f);
   }
 
   private void OnPostRender()
   {
-    if (!activ)
+    if (!activ || startX == -1)
       return;
+
     lineMaterial.SetPass(0);
     GL.Begin(GL.LINES);
     GL.Color(mainColor);
@@ -78,7 +83,6 @@ public class GridDisplay : MonoBehaviour
           GL.Vertex3(startX + i + (step * smallStep), startY, startZ);
           GL.Vertex3(startX + i + (step * smallStep), startY, startZ + sizeZ);
         }
-
     }
 
     GL.End();

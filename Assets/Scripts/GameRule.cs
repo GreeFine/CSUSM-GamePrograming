@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameRule : MonoBehaviour
 {
   public static GameRule instance = null;
-  public Spawner[] spawners = new Spawner[2];
+  public GameObject[] playerBase = new GameObject[2];
   public Dictionary<string, Unit> unitMap = new Dictionary<string, Unit>();
   public Dictionary<string, Building> buildingMap = new Dictionary<string, Building>();
   private void Awake()
