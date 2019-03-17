@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    public void Init()
-    {
-    }
+  public void Init()
+  {
+  }
 }

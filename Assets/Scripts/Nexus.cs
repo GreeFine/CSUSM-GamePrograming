@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Nexus : Tower
 {
-    public int pPidOwner;
-    public Image healthBar;
+  public int pPidOwner;
+  public Image healthBar;
 
-    protected override void Start()
-    {
-    }
+  protected override void Start()
+  {
+  }
 }
