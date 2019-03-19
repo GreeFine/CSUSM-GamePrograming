@@ -7,8 +7,11 @@
 [Ll]ogs/
 [Bb]uild_Data/
 
+build.x86_64
 
 ![Aa]ssets/**/*.meta
+
+
 .vs/
 .gradle/
 ExportedObj/
