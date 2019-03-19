@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Nexus : MonoBehaviour, IAttackable
+public class Nexus : Tower
 {
-    public Vector3 GetPosition() { return this.transform.position; }
+    public int pPidOwner;
+    public Image healthBar;
 
-    public void ReceiveDamage(int dmg)
+    protected override void Start()
     {
-        //TODO
-        Debug.Log("Receive " + dmg.ToString() + " damage");
     }
 }

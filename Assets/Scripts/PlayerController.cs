@@ -12,24 +12,26 @@ public class PlayerController : NetworkBehaviour
   public override void OnStartLocalPlayer()
   {
     if (isServer)
-    {
       pid = 0;
-      spawner = GameRule.instance.spawners[pid];
-      spawner.transform.parent = this.transform;
-    }
     else
-    {
       pid = 1;
-      spawner = GameRule.instance.spawners[pid];
-      spawner.transform.parent = this.transform;
-    }
-    Debug.Log("Player spawned:" + pid); //TODO: fix me
+    spawner = GameRule.instance.spawners[pid];
+    CmdInit(pid);
+    // spawner.transform.parent = this.transform;
+    // CmdReParent();
   }
 
-
-  private void CreateCreep()
+  [Command]
+  public void CmdInit(int pPid)
   {
-    spawner.CmdNewCreep(pid, "default");
+    pid = pPid;
+    spawner = GameRule.instance.spawners[pid];
+  }
+
+  [Command]
+  public void CmdSpawn()
+  {
+    spawner.SpawnUnit(pid, "default");
   }
 
   private void Update()
@@ -37,7 +39,7 @@ public class PlayerController : NetworkBehaviour
     if (isLocalPlayer)
     {
       if (Input.GetKeyDown(KeyCode.L))
-        CreateCreep();
+        CmdSpawn();
       if (Input.GetKeyDown(KeyCode.Escape))
         Application.Quit();
     }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface IAttackable
 {
-  Vector3 GetPosition();
+    Vector3 GetPosition();
 
-  void ReceiveDamage(int damage);
+    GameObject GetGameObject();
+    bool ReceiveDamage(int damage);
 }
