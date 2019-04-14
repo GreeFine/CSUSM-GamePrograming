@@ -14,7 +14,7 @@ public abstract class AAttacker : NetworkBehaviour
     protected float modifierAS = 1f;
     protected bool isAttacking = false;
     protected GameObject currentTarget;
-    protected List<GameObject> targets = new List<GameObject>();
+    protected List<GameObject> targets { get; } = new List<GameObject>();
 
     protected virtual void Update()
     {
@@ -78,12 +78,16 @@ public abstract class AAttacker : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<IAttackable>() != null)
-            targets.Add(other.gameObject);
+            AddTarget(other.gameObject);
     }
+
+    protected virtual void AddTarget(GameObject target) { targets.Add(target); }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<IAttackable>() != null)
-            targets.Remove(other.gameObject);
+            RemoveTarget(other.gameObject);
     }
+
+    protected virtual void RemoveTarget(GameObject target) { targets.Remove(target); }
 }
