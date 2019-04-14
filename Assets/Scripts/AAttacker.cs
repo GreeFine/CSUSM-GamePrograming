@@ -10,11 +10,11 @@ public abstract class AAttacker : NetworkBehaviour
   public float atkRange;
   public float atkSpeed;
 
-  protected float atkReload;
-  protected float modifierAS = 1f;
-  protected bool isAttacking = false;
-  protected GameObject currentTarget;
-  protected List<GameObject> targets = new List<GameObject>();
+    protected float atkReload;
+    protected float modifierAS = 1f;
+    protected bool isAttacking = false;
+    protected GameObject currentTarget;
+    protected List<GameObject> targets { get; } = new List<GameObject>();
 
   protected virtual void Update()
   {
@@ -74,16 +74,20 @@ public abstract class AAttacker : NetworkBehaviour
 
   protected virtual void LaunchAttack() { }
 
-  //Triggers
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.GetComponent<IAttackable>() != null)
-      targets.Add(other.gameObject);
-  }
+    //Triggers
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<IAttackable>() != null)
+            AddTarget(other.gameObject);
+    }
 
-  private void OnTriggerExit(Collider other)
-  {
-    if (other.GetComponent<IAttackable>() != null)
-      targets.Remove(other.gameObject);
-  }
+    protected virtual void AddTarget(GameObject target) { targets.Add(target); }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<IAttackable>() != null)
+            RemoveTarget(other.gameObject);
+    }
+
+    protected virtual void RemoveTarget(GameObject target) { targets.Remove(target); }
 }
