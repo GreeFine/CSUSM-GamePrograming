@@ -18,6 +18,12 @@ public class Unit : AAttacker, IAttackable
   protected bool isDead = false;
   protected int currentHealth;
   protected float modifierMS = 1f;
+    protected int pidOwner = -9;
+    protected Vector3 enemyNexus;
+    protected bool isDead = false;
+    protected int currentHealth;
+    protected float modifierMS = 1f;
+    protected string lastAnim = "Idle";
 
   private void Start()
   {
@@ -26,6 +32,16 @@ public class Unit : AAttacker, IAttackable
     agent.speed = moveSpeed * modifierMS;
     ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
   }
+    private void Start()
+    {
+        NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
+        agent.SetDestination(enemyNexus);
+        agent.speed = moveSpeed * modifierMS;
+        if (hasAnimator)
+            ChangeAnimation("Run");
+        else
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);//FIXME will be remove when we drop Animation component
+    }
 
   [ClientRpc]
   public void RpcInit(int pPidOwner, Vector3 pEnemyNexus)
@@ -60,12 +76,29 @@ public class Unit : AAttacker, IAttackable
     GetComponent<NavMeshAgent>().destination = enemyNexus;
     GetComponent<NavMeshAgent>().isStopped = false;
   }
+    protected override void NoTargets()
+    {
+        if (hasAnimator)
+            ChangeAnimation("Run");
+        else
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        GetComponent<NavMeshAgent>().destination = enemyNexus;
+        GetComponent<NavMeshAgent>().isStopped = false;
+    }
 
   protected override void TargetNotInRange()
   {
     ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
     GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
   }
+    protected override void TargetNotInRange()
+    {
+        if (hasAnimator)
+            ChangeAnimation("Run");
+        else
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
+    }
 
   protected override void LaunchAttack()
   {
@@ -91,6 +124,18 @@ public class Unit : AAttacker, IAttackable
     else
       GetComponent<Animation>().Play(name);
   }
+    private void ChangeAnimation(string name)
+    {
+        if (hasAnimator)
+        {
+            GetComponent<Animator>().speed = 1f;
+            GetComponent<Animator>().SetBool(lastAnim, false);
+            lastAnim = name;
+            GetComponent<Animator>().SetBool(name, true);
+        }
+        else
+            GetComponent<Animation>().Play(name);
+    }
 
   private void ChangeAnimation(string name, float animeSpeed = 1.0f)
   {
@@ -100,6 +145,18 @@ public class Unit : AAttacker, IAttackable
     {
       GetComponent<Animation>()[name].speed = GetComponent<Animation>()[name].length / animeSpeed;
       GetComponent<Animation>().Play(name, PlayMode.StopAll);
+        if (hasAnimator)
+        {
+            GetComponent<Animator>().SetBool(lastAnim, false);
+            lastAnim = name;
+            GetComponent<Animator>().SetBool(name, true);
+            GetComponent<Animator>().speed = animeSpeed;
+        }
+        else
+        {
+            GetComponent<Animation>()[name].speed = GetComponent<Animation>()[name].length / animeSpeed;
+            GetComponent<Animation>().Play(name, PlayMode.StopAll);
+        }
     }
   }
 
