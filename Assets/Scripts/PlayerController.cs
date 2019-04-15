@@ -3,43 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
 public class PlayerController : NetworkBehaviour
 {
-  private int pid = -1;
-  private Spawner spawner = null;
+  public static int pId = -1;
 
-
-  public override void OnStartLocalPlayer()
+  private void Start()
   {
     if (isServer)
-      pid = 0;
+    {
+      pId = 0;
+    }
     else
-      pid = 1;
-    spawner = GameRule.instance.spawners[pid];
-    CmdInit(pid);
-    // spawner.transform.parent = this.transform;
-    // CmdReParent();
+    {
+      pId = 1;
+      CmdStartGame();
+    }
   }
 
   [Command]
-  public void CmdInit(int pPid)
+  private void CmdStartGame()
   {
-    pid = pPid;
-    spawner = GameRule.instance.spawners[pid];
-  }
-
-  [Command]
-  public void CmdSpawn()
-  {
-    spawner.SpawnUnit(pid, "default");
+    GameRule.instance.RpcGameStarted();
   }
 
   private void Update()
   {
     if (isLocalPlayer)
     {
-      if (Input.GetKeyDown(KeyCode.L))
-        CmdSpawn();
       if (Input.GetKeyDown(KeyCode.Escape))
         Application.Quit();
     }

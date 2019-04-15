@@ -5,21 +5,30 @@ using UnityEngine.Networking;
 
 public class Spawner : NetworkBehaviour
 {
-  private List<Unit> unitsCreated = new List<Unit>();
-  private List<Unit> unitsActive { get; } = new List<Unit>();
+  public List<(int, string, Vector3)> placedUnits = new List<(int, string, Vector3)>();
   public Nexus enemyNexus = null;
+  private float WaveTime = 10.0f;
+  private List<Unit> unitsActive { get; } = new List<Unit>();
+  private float Timer = 0.0f;
 
-
-  public void SpawnUnit(int playerId, string creepName)
+  public void SpawnUnits()
   {
-    Unit tmp = Instantiate(GameRule.instance.unitList[creepName], transform.position, transform.rotation);
-    NetworkServer.Spawn(tmp.gameObject);
-    tmp.RpcInit(playerId, transform.position, enemyNexus.transform.position);
-    unitsActive.Add(tmp);
+    foreach (var unit in placedUnits)
+    {
+      Quaternion quaternion = new Quaternion(0, 0, 0, 0);
+      Unit tmp = Instantiate(GameRule.instance.unitMap[unit.Item2], unit.Item3, quaternion);
+      NetworkServer.Spawn(tmp.gameObject);
+      tmp.RpcInit(unit.Item1, enemyNexus.transform.position);
+    }
   }
-
-  private void FixedUpdate()
+  private void Update()
   {
-    //SPAWN THE UNITS
+    if (!isServer) return;
+    Timer -= Time.deltaTime;
+    if (Timer < 0.0f)
+    {
+      SpawnUnits();
+      Timer = WaveTime;
+    }
   }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AtkBuilding
   - Creep
+  - ConstructionArea
   layers:
   - Default
   - TransparentFX
