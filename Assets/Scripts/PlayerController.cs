@@ -17,8 +17,14 @@ public class PlayerController : NetworkBehaviour
     else
     {
       pId = 1;
+      CmdStartGame();
     }
-    Camera.main.GetComponent<GridDisplay>().Init();
+  }
+
+  [Command]
+  private void CmdStartGame()
+  {
+    GameRule.instance.RpcGameStarted();
   }
 
   private void Update()

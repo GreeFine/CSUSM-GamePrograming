@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class Builder : NetworkBehaviour
 {
-
   private bool positioning = false;
   private Building ghost = null;
   private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -36,10 +35,12 @@ public class Builder : NetworkBehaviour
 
   private void Update()
   {
+    if (!GameRule.instance.gameStarted)
+      return;
     if (Input.GetKeyDown(KeyCode.N))
     {
       if (ghost != null)
-        Destroy(ghost);
+        Destroy(ghost.gameObject);
       positioning = true;
       Quaternion quaternion = new Quaternion(0, PlayerController.pId * 180, 0, 0);
       ghost = Instantiate(GameRule.instance.buildingMap["default"], this.transform.position, quaternion);
@@ -54,22 +55,38 @@ public class Builder : NetworkBehaviour
       if (Input.GetMouseButtonDown(0))
       {
         positioning = false;
-        Destroy(ghost);
+        Destroy(ghost.gameObject);
         ghost = null;
-        CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
+        if (isServer)
+          CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
+        else if (buyUnit(PlayerController.pId, "default"))
+          CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
       }
     }
+  }
+
+  private bool buyUnit(int pId, string buildingName)
+  {
+    uint cost = GameRule.instance.priceMap[buildingName];
+    if (GameRule.instance.mana[pId] < cost)
+      return false;
+
+    GameRule.instance.mana[pId] -= cost;
+    return true;
   }
 
   [Command]
   private void CmdPlaceNewBuilding(int pId, string buildingName, Vector3 pos)
   {
-    Spawner spawner = GameRule.instance.playerBase[pId].GetComponentInChildren<Spawner>();
-    Quaternion quaternion = new Quaternion(0, pId * 180, 0, 0); //FIXME: depend on player side
-    Building tmp = Instantiate(GameRule.instance.buildingMap[buildingName], pos, quaternion);
-    pos.x += spawner.transform.localPosition.x - this.transform.localPosition.x;
-    spawner.placedUnits.Add((pId, buildingName, pos));
-    NetworkServer.Spawn(tmp.gameObject);
-    tmp.Init();
+    if (buyUnit(pId, buildingName))
+    {
+      Spawner spawner = GameRule.instance.playerBase[pId].GetComponentInChildren<Spawner>();
+      Quaternion quaternion = new Quaternion(0, pId * 180, 0, 0);
+      Building tmp = Instantiate(GameRule.instance.buildingMap[buildingName], pos, quaternion);
+      pos.x += spawner.transform.localPosition.x - this.transform.localPosition.x;
+      spawner.placedUnits.Add((pId, buildingName, pos));
+      NetworkServer.Spawn(tmp.gameObject);
+      tmp.Init();
+    }
   }
 }

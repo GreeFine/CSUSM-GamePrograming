@@ -15,11 +15,10 @@ public class Spawner : NetworkBehaviour
   {
     foreach (var unit in placedUnits)
     {
-      Quaternion quaternion = new Quaternion(0, 0, 0, 0);//FIXME: depend on pid
+      Quaternion quaternion = new Quaternion(0, 0, 0, 0);
       Unit tmp = Instantiate(GameRule.instance.unitMap[unit.Item2], unit.Item3, quaternion);
       NetworkServer.Spawn(tmp.gameObject);
       tmp.RpcInit(unit.Item1, enemyNexus.transform.position);
-      // unitsActive.Add(tmp);
     }
   }
   private void Update()

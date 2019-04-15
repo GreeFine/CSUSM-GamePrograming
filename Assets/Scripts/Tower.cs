@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Tower : AAttacker, IAttackable
 {
   public GameObject lowerBody;
   public Projectile projectile;
   public GameObject spawnPosition;
+  public Image healthBar;
+
+
+  public int health = 0;
+  public int MaxHealth = 0;
 
   private Quaternion defaultRotation;
+
+  protected virtual void onDestroyed() { }
 
   protected virtual void Start()
   {
@@ -48,8 +55,11 @@ public class Tower : AAttacker, IAttackable
 
   public bool ReceiveDamage(int dmg)
   {
-    //TODO
-    Debug.Log("Receive " + dmg.ToString() + " damage");
+    health -= dmg;
+    healthBar.fillAmount = (float)health / (float)MaxHealth;
+
+    if (health <= 0)
+      onDestroyed();
     return false;
   }
 }
