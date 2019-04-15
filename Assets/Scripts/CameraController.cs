@@ -12,11 +12,11 @@ public class CameraController : MonoBehaviour
 
   public void Init()
   {
+    this.transform.position = GameRule.instance.playerBase[PlayerController.pId].transform.position;
+    this.transform.position += new Vector3(0, 15, 0);
     if (PlayerController.pId == 1)
-    {
-      this.transform.position += new Vector3(128, 0, 0);
       this.transform.eulerAngles = new Vector3(60, 270, 0);
-    }
+
     startPos = this.transform.position;
   }
 

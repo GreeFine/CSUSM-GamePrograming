@@ -10,7 +10,7 @@ public class Nexus : Tower
   protected override void Start()
   {
     MaxHealth = 30;
-    health = 10; //FIXME
+    health = MaxHealth;
   }
 
   protected override void onDestroyed()

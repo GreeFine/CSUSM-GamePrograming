@@ -25,7 +25,7 @@ public class GameRule : NetworkBehaviour
       instance = this;
       unitMap.Add("default", Resources.Load<Unit>("Prefabs/DefaultUnit"));//FIXME: sub folder creeps?
       buildingMap.Add("default", Resources.Load<Building>("Prefabs/Buildings/Unit/B_DefaultUnit"));
-      priceMap.Add("default", 100);
+      priceMap.Add("default", 30);
     }
     else
       Destroy(this);

@@ -59,13 +59,13 @@ public class Builder : NetworkBehaviour
         ghost = null;
         if (isServer)
           CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
-        else if (buyUnit(PlayerController.pId, "default"))
+        else if (buyBuilding(PlayerController.pId, "default"))
           CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
       }
     }
   }
 
-  private bool buyUnit(int pId, string buildingName)
+  private bool buyBuilding(int pId, string buildingName)
   {
     uint cost = GameRule.instance.priceMap[buildingName];
     if (GameRule.instance.mana[pId] < cost)
@@ -78,7 +78,7 @@ public class Builder : NetworkBehaviour
   [Command]
   private void CmdPlaceNewBuilding(int pId, string buildingName, Vector3 pos)
   {
-    if (buyUnit(pId, buildingName))
+    if (buyBuilding(pId, buildingName))
     {
       Spawner spawner = GameRule.instance.playerBase[pId].GetComponentInChildren<Spawner>();
       Quaternion quaternion = new Quaternion(0, pId * 180, 0, 0);
