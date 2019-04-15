@@ -18,13 +18,17 @@ public class Unit : AAttacker, IAttackable
     protected bool isDead = false;
     protected int currentHealth;
     protected float modifierMS = 1f;
+    protected string lastAnim = "Idle";
 
     private void Start()
     {
         NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
         agent.SetDestination(enemyNexus);
         agent.speed = moveSpeed * modifierMS;
-        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        if (hasAnimator)
+            ChangeAnimation("Run");
+        else
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);//FIXME will be remove when we drop Animation component
     }
 
     [ClientRpc]
@@ -57,14 +61,20 @@ public class Unit : AAttacker, IAttackable
 
     protected override void NoTargets()
     {
-        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        if (hasAnimator)
+            ChangeAnimation("Run");
+        else
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
         GetComponent<NavMeshAgent>().destination = enemyNexus;
         GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     protected override void TargetNotInRange()
     {
-        ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
+        if (hasAnimator)
+            ChangeAnimation("Run");
+        else
+            ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
         GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
     }
 
@@ -88,7 +98,12 @@ public class Unit : AAttacker, IAttackable
     private void ChangeAnimation(string name)
     {
         if (hasAnimator)
+        {
+            GetComponent<Animator>().speed = 1f;
+            GetComponent<Animator>().SetBool(lastAnim, false);
+            lastAnim = name;
             GetComponent<Animator>().SetBool(name, true);
+        }
         else
             GetComponent<Animation>().Play(name);
     }
@@ -96,7 +111,12 @@ public class Unit : AAttacker, IAttackable
     private void ChangeAnimation(string name, float animeSpeed = 1.0f)
     {
         if (hasAnimator)
+        {
+            GetComponent<Animator>().SetBool(lastAnim, false);
+            lastAnim = name;
             GetComponent<Animator>().SetBool(name, true);
+            GetComponent<Animator>().speed = animeSpeed;
+        }
         else
         {
             GetComponent<Animation>()[name].speed = GetComponent<Animation>()[name].length / animeSpeed;
