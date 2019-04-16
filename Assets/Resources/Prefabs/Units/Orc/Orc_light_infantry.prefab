@@ -1233,7 +1233,7 @@ MonoBehaviour:
   healthBar: {fileID: 4298783176874297614}
   maxHealth: 20
   moveSpeed: 3
-  animDmgTime: 0.3
+  animDmgTime: 1.5
 --- !u!54 &3987213328579817484
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4234,6 +4234,16 @@ PrefabInstance:
     - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
+        type: 3}
+      propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []

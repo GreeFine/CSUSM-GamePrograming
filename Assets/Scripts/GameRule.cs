@@ -23,7 +23,7 @@ public class GameRule : NetworkBehaviour
   {
     unitMap.Add(name, Resources.Load<Unit>("Prefabs/Units/" + name));
     buildingMap.Add(name, Resources.Load<Building>("Prefabs/Buildings/Units/" + name + "_B"));
-    priceMap.Add(name, 30);
+    priceMap.Add(name, price);
   }
 
   private void Awake()
@@ -31,9 +31,9 @@ public class GameRule : NetworkBehaviour
     if (instance == null)
     {
       instance = this;
-      AddNewUnit("Nature/Spider", 30);
-      AddNewUnit("Orc/Orc_light_infantry", 60);
+      AddNewUnit("Nature/Spider", 60);
       AddNewUnit("Orc/Orc_archer", 100);
+      AddNewUnit("Orc/Orc_light_infantry", 150);
     }
     else
       Destroy(this);
