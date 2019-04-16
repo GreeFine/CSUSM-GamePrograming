@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7341555489661628085}
   - component: {fileID: 8103215821490400684}
   m_Layer: 0
-  m_Name: B_DefaultUnit
+  m_Name: Spider_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7890820482889924016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.395, y: 0, z: 6.946}
+  m_LocalPosition: {x: -55, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7890820481434886277}
