@@ -1321,7 +1321,7 @@ GameObject:
   - component: {fileID: 152}
   - component: {fileID: 154}
   m_Layer: 9
-  m_Name: DefaultUnit
+  m_Name: Spider
   m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1340,7 +1340,7 @@ Transform:
   m_Children:
   - {fileID: 94}
   - {fileID: 95}
-  - {fileID: 8794352384366914895}
+  - {fileID: 8794352384366914818}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1356,11 +1356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc30ec2d8ab35d469669e97163e9801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 1
+  atkDmg: 2
   atkRange: 3
   atkSpeed: 2
   hasAnimator: 0
-  healthBar: {fileID: 8794352384366914905}
+  healthBar: {fileID: 8794352384366914843}
   maxHealth: 10
   moveSpeed: 3
   animDmgTime: 1
@@ -2071,13 +2071,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &8794352384366914895 stripped
+--- !u!224 &8794352384366914818 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 8794352384366915048}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8794352384366914905 stripped
+--- !u!114 &8794352384366914843 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}

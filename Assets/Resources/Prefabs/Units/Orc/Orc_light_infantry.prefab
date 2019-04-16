@@ -1122,7 +1122,7 @@ Transform:
   - {fileID: 8859773828763479065}
   - {fileID: 8859773828763404951}
   - {fileID: 8859773828763406675}
-  - {fileID: 4298783176874297759}
+  - {fileID: 4298783176874297810}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1225,12 +1225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc30ec2d8ab35d469669e97163e9801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 10
-  atkRange: 2
+  atkDmg: 5
+  atkRange: 3
   atkSpeed: 1.5
   hasAnimator: 1
-  healthBar: {fileID: 4298783176874297737}
-  maxHealth: 100
+  healthBar: {fileID: 4298783176874297803}
+  maxHealth: 20
   moveSpeed: 3
   animDmgTime: 1.5
 --- !u!1 &8859773828763055199
@@ -4221,13 +4221,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &4298783176874297759 stripped
+--- !u!224 &4298783176874297810 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 4298783176874297656}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4298783176874297737 stripped
+--- !u!114 &4298783176874297803 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
