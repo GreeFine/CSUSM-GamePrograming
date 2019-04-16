@@ -3276,6 +3276,7 @@ GameObject:
   - component: {fileID: 1210625739727279609}
   - component: {fileID: 7688695448278809165}
   - component: {fileID: 6403467032852422588}
+  - component: {fileID: 5308209791000058021}
   m_Layer: 0
   m_Name: Orc_archer
   m_TagString: Creep
@@ -3318,7 +3319,7 @@ Transform:
   - {fileID: 2143883814940051}
   - {fileID: 2143883815014545}
   - {fileID: 2143883814958111}
-  - {fileID: 8838774113277602629}
+  - {fileID: 8838774113277602717}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3349,7 +3350,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143883815277315}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -3425,10 +3426,26 @@ MonoBehaviour:
   atkRange: 6
   atkSpeed: 2
   hasAnimator: 1
-  healthBar: {fileID: 8838774113277602652}
+  healthBar: {fileID: 8838774113277602713}
   maxHealth: 10
   moveSpeed: 3
   animDmgTime: 2
+--- !u!54 &5308209791000058021
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143883815277315}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2143883815278331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,13 +4238,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &8838774113277602629 stripped
+--- !u!224 &8838774113277602717 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 8838774113277602735}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8838774113277602652 stripped
+--- !u!114 &8838774113277602713 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}

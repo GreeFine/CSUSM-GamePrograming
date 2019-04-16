@@ -1080,6 +1080,7 @@ GameObject:
   - component: {fileID: 3071544458633360968}
   - component: {fileID: 4354791610963832984}
   - component: {fileID: 3729003804057256414}
+  - component: {fileID: 3987213328579817484}
   m_Layer: 0
   m_Name: Orc_light_infantry
   m_TagString: Creep
@@ -1122,7 +1123,7 @@ Transform:
   - {fileID: 8859773828763479065}
   - {fileID: 8859773828763404951}
   - {fileID: 8859773828763406675}
-  - {fileID: 4298783176874297810}
+  - {fileID: 4298783176874297610}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1153,7 +1154,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8859773828763054601}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -1229,10 +1230,26 @@ MonoBehaviour:
   atkRange: 3
   atkSpeed: 1.5
   hasAnimator: 1
-  healthBar: {fileID: 4298783176874297803}
+  healthBar: {fileID: 4298783176874297614}
   maxHealth: 20
   moveSpeed: 3
-  animDmgTime: 1.5
+  animDmgTime: 0.3
+--- !u!54 &3987213328579817484
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859773828763054601}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8859773828763055199
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,13 +4238,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &4298783176874297810 stripped
+--- !u!224 &4298783176874297610 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 4298783176874297656}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4298783176874297803 stripped
+--- !u!114 &4298783176874297614 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
