@@ -3278,7 +3278,7 @@ GameObject:
   - component: {fileID: 6403467032852422588}
   m_Layer: 0
   m_Name: Orc_archer
-  m_TagString: Untagged
+  m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3318,7 +3318,7 @@ Transform:
   - {fileID: 2143883814940051}
   - {fileID: 2143883815014545}
   - {fileID: 2143883814958111}
-  - {fileID: 3206865700781407808}
+  - {fileID: 8838774113277602716}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3425,7 +3425,7 @@ MonoBehaviour:
   atkRange: 5
   atkSpeed: 2
   hasAnimator: 1
-  healthBar: {fileID: 3068032893352179097}
+  healthBar: {fileID: 8838774113277602712}
   maxHealth: 50
   moveSpeed: 3
   animDmgTime: 2.5
@@ -4221,13 +4221,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &3206865700781407808 stripped
+--- !u!224 &8838774113277602716 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 8838774113277602735}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3068032893352179097 stripped
+--- !u!114 &8838774113277602712 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}

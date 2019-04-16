@@ -9,6 +9,7 @@ public class Builder : NetworkBehaviour
   private Building ghost = null;
   private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
   private Vector3 lastValidPos = Vector3.zero;
+  private string currrentUnitName = "";
 
   private void Start()
   {
@@ -33,19 +34,26 @@ public class Builder : NetworkBehaviour
     return false;
   }
 
+  private void CreateGhost(string name)
+  {
+    currrentUnitName = name;
+    if (ghost != null)
+      Destroy(ghost.gameObject);
+    positioning = true;
+    Quaternion quaternion = new Quaternion(0, PlayerController.pId * 180, 0, 0);
+    ghost = Instantiate(GameRule.instance.buildingMap[currrentUnitName], this.transform.position, quaternion);
+  }
+
   private void Update()
   {
     if (!GameRule.instance.gameStarted)
       return;
-    if (Input.GetKeyDown(KeyCode.N))
-    {
-      if (ghost != null)
-        Destroy(ghost.gameObject);
-      positioning = true;
-      Quaternion quaternion = new Quaternion(0, PlayerController.pId * 180, 0, 0);
-      ghost = Instantiate(GameRule.instance.buildingMap["default"], this.transform.position, quaternion);
-    }
-
+    if (Input.GetKeyDown(KeyCode.Alpha1))
+      CreateGhost("Nature/Spider");
+    if (Input.GetKeyDown(KeyCode.Alpha2))
+      CreateGhost("Orc/Orc_light_infantry");
+    if (Input.GetKeyDown(KeyCode.Alpha3))
+      CreateGhost("Orc/Orc_archer");
     if (positioning)
     {
       Vector3 pos;
@@ -58,9 +66,9 @@ public class Builder : NetworkBehaviour
         Destroy(ghost.gameObject);
         ghost = null;
         if (isServer)
-          CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
-        else if (buyBuilding(PlayerController.pId, "default"))
-          CmdPlaceNewBuilding(PlayerController.pId, "default", pos);
+          CmdPlaceNewBuilding(PlayerController.pId, currrentUnitName, pos);
+        else if (buyBuilding(PlayerController.pId, currrentUnitName))
+          CmdPlaceNewBuilding(PlayerController.pId, currrentUnitName, pos);
       }
     }
   }

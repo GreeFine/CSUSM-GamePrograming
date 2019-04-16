@@ -1082,7 +1082,7 @@ GameObject:
   - component: {fileID: 3729003804057256414}
   m_Layer: 0
   m_Name: Orc_light_infantry
-  m_TagString: Untagged
+  m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1122,7 +1122,7 @@ Transform:
   - {fileID: 8859773828763479065}
   - {fileID: 8859773828763404951}
   - {fileID: 8859773828763406675}
-  - {fileID: 7890563707760368855}
+  - {fileID: 4298783176874297611}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1229,7 +1229,7 @@ MonoBehaviour:
   atkRange: 2
   atkSpeed: 1.5
   hasAnimator: 1
-  healthBar: {fileID: 7751307484000196366}
+  healthBar: {fileID: 4298783176874297615}
   maxHealth: 100
   moveSpeed: 3
   animDmgTime: 1.5
@@ -4221,13 +4221,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &7890563707760368855 stripped
+--- !u!224 &4298783176874297611 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 4298783176874297656}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7751307484000196366 stripped
+--- !u!114 &4298783176874297615 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
