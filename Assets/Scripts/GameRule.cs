@@ -18,14 +18,22 @@ public class GameRule : NetworkBehaviour
   public uint[] mana = new uint[2] { startingMana, startingMana };
   private uint timer = 0;
   private uint numberOfPlayer = 0;
+
+  private void AddNewUnit(string name, uint price)
+  {
+    unitMap.Add(name, Resources.Load<Unit>("Prefabs/Units/" + name));
+    buildingMap.Add(name, Resources.Load<Building>("Prefabs/Buildings/Units/" + name + "_B"));
+    priceMap.Add(name, price);
+  }
+
   private void Awake()
   {
     if (instance == null)
     {
       instance = this;
-      unitMap.Add("default", Resources.Load<Unit>("Prefabs/DefaultUnit"));//FIXME: sub folder creeps?
-      buildingMap.Add("default", Resources.Load<Building>("Prefabs/Buildings/Unit/B_DefaultUnit"));
-      priceMap.Add("default", 30);
+      AddNewUnit("Nature/Spider", 60);
+      AddNewUnit("Orc/Orc_archer", 100);
+      AddNewUnit("Orc/Orc_light_infantry", 150);
     }
     else
       Destroy(this);

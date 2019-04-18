@@ -15,7 +15,7 @@ public class Tower : AAttacker, IAttackable
 
   private Quaternion defaultRotation;
 
-  protected virtual void onDestroyed() { }
+  protected virtual void onDestroyed() { Destroy(this.gameObject); }
 
   protected virtual void Start()
   {
