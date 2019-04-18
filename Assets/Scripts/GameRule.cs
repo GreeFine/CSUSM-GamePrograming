@@ -13,9 +13,9 @@ public class GameRule : NetworkBehaviour
   public Dictionary<string, uint> priceMap = new Dictionary<string, uint>();
 
   public bool gameStarted = false;
-  private const uint startingMana = 100;
-  public uint incomPersec = 5;
-  public uint[] mana = new uint[2] { startingMana, startingMana };
+  private const uint startingMana = 200;
+  private const uint incomPersec = 10;
+  public uint[] mana = new uint[2];
   private uint timer = 0;
   private uint numberOfPlayer = 0;
 
@@ -42,6 +42,8 @@ public class GameRule : NetworkBehaviour
   [ClientRpc]
   public void RpcGameStarted()
   {
+    instance.mana[0] = startingMana;
+    instance.mana[1] = startingMana;
     gameStarted = true;
     Camera.main.GetComponent<GridDisplay>().Init();
     Camera.main.GetComponent<CameraController>().Init();

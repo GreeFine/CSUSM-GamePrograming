@@ -9,22 +9,28 @@ public abstract class AAttacker : NetworkBehaviour
   public int atkDmg;
   public float atkRange;
   public float atkSpeed;
-  protected float atkReload;
+  protected float atkReload = 0;
   protected float modifierAS = 1f;
   protected bool isAttacking = false;
   protected GameObject currentTarget;
   protected List<GameObject> targets { get; } = new List<GameObject>();
+
+  public bool Debug = false;
 
   protected virtual void Update()
   {
     atkReload -= Time.deltaTime;
     if (atkReload <= 0)
     {
+      if (Debug)
+        print("redo?1: " + atkReload.ToString() + " | " + this.GetInstanceID().ToString());
       if (isAttacking)
         Cancel();
       if (currentTarget == null && targets.Count > 0)
         ChooseTarget();
       StartAttack();
+      if (Debug)
+        print("redo?2: " + atkReload.ToString() + " | " + this.GetInstanceID().ToString());
     }
   }
 
@@ -52,16 +58,23 @@ public abstract class AAttacker : NetworkBehaviour
     {
       isAttacking = false;
       NoTargets();
-      return;
+      atkReload = 0;
     }
-    if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > atkRange)
+    else if (Vector3.Distance(this.transform.position, currentTarget.GetComponent<IAttackable>().GetPosition()) > atkRange)
     {
       isAttacking = false;
       TargetNotInRange();
-      return;
+      atkReload = 0;
     }
-    isAttacking = true;
-    LaunchAttack();
+    else
+    {
+      isAttacking = true;
+      if (Debug)
+        print("Reload?: " + atkReload + " | " + atkSpeed);
+      atkReload += atkSpeed;
+      LaunchAttack();
+    }
+
   }
 
   //Specifics Implementations

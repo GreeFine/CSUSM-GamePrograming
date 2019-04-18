@@ -42,7 +42,7 @@ public class Tower : AAttacker, IAttackable
     if (currentTarget == null)
       return;
     lowerBody.transform.rotation.SetLookRotation(currentTarget.transform.position);
-    atkReload = atkSpeed * modifierAS;
+    // atkReload = atkSpeed * modifierAS;
     tmp = Instantiate(projectile, this.transform.parent, true);
     tmp.transform.position = spawnPosition.transform.position;
     tmp.Init(currentTarget);

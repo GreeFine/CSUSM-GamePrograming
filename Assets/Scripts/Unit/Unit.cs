@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -31,10 +31,10 @@ public class Unit : AAttacker, IAttackable
     modifierAS = 1f;
     this.GetComponent<SphereCollider>().radius = atkRange;
     if (pPidOwner == 1)
-    {
-      healthBar.GetComponentInParent<Canvas>().GetComponent<RectTransform>().Rotate(new Vector3(1, 0, 0), -90);
       healthBar.fillOrigin = 0;
-    }
+    if (pPidOwner != PlayerController.pId)
+      healthBar.color = new Color(255, 0, 0);
+    healthBar.GetComponentInParent<HealthBar>().enabled = true;
 
     NavMeshAgent agent = this.gameObject.AddComponent<NavMeshAgent>();
     agent.SetDestination(enemyNexus);
@@ -42,7 +42,7 @@ public class Unit : AAttacker, IAttackable
     if (hasAnimator)
       ChangeAnimation("Run");
     else
-      ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);//FIXME will be remove when we drop Animation component
+      ChangeAnimation("Run", GetComponent<Animation>()["Run"].length * modifierMS);
   }
 
   private void LateUpdate()
@@ -53,7 +53,7 @@ public class Unit : AAttacker, IAttackable
 
   protected override void Cancel()
   {
-    ChangeAnimation("Idle");
+    // ChangeAnimation("Idle");
   }
 
   protected override void NoTargets()
@@ -79,9 +79,10 @@ public class Unit : AAttacker, IAttackable
   {
     GetComponent<NavMeshAgent>().isStopped = true;
     this.transform.LookAt(currentTarget.transform);
-    atkReload = atkSpeed * modifierAS;
-    ChangeAnimation("Attack", atkSpeed * modifierAS);
-    StartCoroutine(AtkWindUpComplete(animDmgTime * modifierAS, currentTarget));
+    ChangeAnimation("Attack", atkSpeed);
+    if (Debug)
+      print("Attack? " + "animT:" + animDmgTime + " : " + this.GetInstanceID());
+    StartCoroutine(AtkWindUpComplete(animDmgTime, currentTarget));
   }
 
   //Animation
@@ -90,43 +91,47 @@ public class Unit : AAttacker, IAttackable
     yield return new WaitForSeconds(time);
     if (target != null)
       target.GetComponent<IAttackable>().ReceiveDamage(atkDmg);
-    yield return null;
+
+    if (Debug)
+      print("Do dammage ! " + this.GetInstanceID().ToString());
   }
 
   private void ChangeAnimation(string name)
   {
     if (hasAnimator)
     {
-      GetComponent<Animator>().speed = 1f;
       GetComponent<Animator>().SetBool(lastAnim, false);
       lastAnim = name;
       GetComponent<Animator>().SetBool(name, true);
+      GetComponent<Animator>().speed = 1f;
     }
     else
       GetComponent<Animation>().Play(name);
   }
 
-  private void ChangeAnimation(string name, float animeSpeed = 1.0f)
+  private void ChangeAnimation(string name, float desiratedSpeed = 1.0f)
   {
     if (hasAnimator)
+    {
+      GetComponent<Animator>().SetBool(lastAnim, false);
+      lastAnim = name;
       GetComponent<Animator>().SetBool(name, true);
+      GetComponent<Animator>().speed = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length / desiratedSpeed;
+      if (Debug)
+        print("ChangeAnim Speed: " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + " -> " + desiratedSpeed + " -> " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length / desiratedSpeed + " | " + this.GetInstanceID().ToString());
+    }
     else
     {
-      GetComponent<Animation>()[name].speed = GetComponent<Animation>()[name].length / animeSpeed;
+      GetComponent<Animation>()[name].speed = GetComponent<Animation>()[name].length / desiratedSpeed;
       GetComponent<Animation>().Play(name, PlayMode.StopAll);
-      if (hasAnimator)
-      {
-        GetComponent<Animator>().SetBool(lastAnim, false);
-        lastAnim = name;
-        GetComponent<Animator>().SetBool(name, true);
-        GetComponent<Animator>().speed = animeSpeed;
-      }
-      else
-      {
-        GetComponent<Animation>()[name].speed = GetComponent<Animation>()[name].length / animeSpeed;
-        GetComponent<Animation>().Play(name, PlayMode.StopAll);
-      }
     }
+  }
+
+  private float GetAnimationLength()
+  {
+    if (hasAnimator)
+      return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+    return GetComponent<Animation>()[name].length;
   }
 
   //Interface : IAttackable
