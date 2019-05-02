@@ -67,7 +67,6 @@ public class Unit : AAttacker, IAttackable
   protected override void NoTargets()
   {
     ChangeAnimation("Run");
-
     GetComponent<NavMeshAgent>().destination = enemyNexus;
     GetComponent<NavMeshAgent>().isStopped = false;
   }
@@ -75,6 +74,7 @@ public class Unit : AAttacker, IAttackable
   protected override void TargetNotInRange()
   {
     ChangeAnimation("Run");
+    GetComponent<NavMeshAgent>().isStopped = false;
     GetComponent<NavMeshAgent>().destination = currentTarget.GetComponent<IAttackable>().GetPosition();
   }
 
@@ -83,8 +83,6 @@ public class Unit : AAttacker, IAttackable
     GetComponent<NavMeshAgent>().isStopped = true;
     this.transform.LookAt(currentTarget.transform);
     ChangeAnimation("Attack", atkSpeed);
-    if (Debug)
-      print("Attack? " + "animT:" + animDmgTime + " : " + this.GetInstanceID());
     StartCoroutine(AtkWindUpComplete(animDmgTime, currentTarget));
   }
 
@@ -94,9 +92,6 @@ public class Unit : AAttacker, IAttackable
     yield return new WaitForSeconds(time);
     if (target != null)
       target.GetComponent<IAttackable>().ReceiveDamage(atkDmg);
-
-    if (Debug)
-      print("Do dammage ! " + this.GetInstanceID().ToString());
   }
 
   private void ChangeAnimation(string name)
@@ -113,8 +108,6 @@ public class Unit : AAttacker, IAttackable
     lastAnim = name;
     GetComponent<Animator>().SetBool(name, true);
     GetComponent<Animator>().speed = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length / desiratedSpeed;
-    if (Debug)
-      print("ChangeAnim Speed: " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + " -> " + desiratedSpeed + " -> " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length / desiratedSpeed + " | " + this.GetInstanceID().ToString());
   }
 
   private float GetAnimationLength()

@@ -530,15 +530,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089f6c2aadfb78b43a5410c9c3940e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeX: 7
-  gridSizeZ: 7
+  gridSizeX: 5
+  gridSizeZ: 5
   largeStep: 1
   smallStep: 0.2
-  mainColor: {r: 0, g: 1, b: 0, a: 1}
   subColor: {r: 1, g: 1, b: 1, a: 1}
-  lineColor: {r: 1, g: 0, b: 0, a: 1}
   subActiv: 0
-  activ: 1
+  activ: 0
 --- !u!114 &534669908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,8 +1115,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687231284}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
   m_Children: []
   m_Father: {fileID: 392957475}
   m_RootOrder: 2
@@ -1131,8 +1129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860235918}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
   m_Children: []
   m_Father: {fileID: 1140855017}
   m_RootOrder: 2

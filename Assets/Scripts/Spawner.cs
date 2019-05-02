@@ -16,7 +16,10 @@ public class Spawner : NetworkBehaviour
     foreach (var unit in placedUnits)
     {
       Quaternion quaternion = new Quaternion(0, 0, 0, 0);
-      Unit tmp = Instantiate(GameRule.instance.unitMap[unit.Item2], unit.Item3, quaternion);
+      Unit unitObj = GameRule.instance.unitMap[unit.Item2];
+
+      Unit tmp = Instantiate(unitObj, unit.Item3, unitObj.transform.rotation);
+      tmp.transform.Rotate(0f, unit.Item1 * 180f, 0f, Space.Self);
       NetworkServer.Spawn(tmp.gameObject);
       tmp.RpcInit(unit.Item1, enemyNexus.transform.position);
     }

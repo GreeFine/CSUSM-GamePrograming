@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8012238916066138526}
   - component: {fileID: 1635898326444308750}
   - component: {fileID: 2207974811625300001}
+  - component: {fileID: 5013595710294207108}
   m_Layer: 0
   m_Name: Orc_archer_B
   m_TagString: Untagged
@@ -42,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6214604438879984247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
@@ -78,6 +79,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56197eaa647286f4f9cbd849f02ec54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &5013595710294207108
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214604438879984247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5bf914833b3b7974cb5f6a4c262bfae3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2292318926178175940
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1434,7 +1434,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135070}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1462,10 +1462,10 @@ Transform:
   - {fileID: 422152}
   - {fileID: 422490}
   - {fileID: 421618}
-  - {fileID: 705078674470602099}
+  - {fileID: 705078674470600983}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &9513200
 Animator:
   serializedVersion: 3
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   atkRange: 6
   atkSpeed: 1
   Debug: 0
-  healthBar: {fileID: 705078674470602072}
+  healthBar: {fileID: 705078674470601084}
   maxHealth: 3
   moveSpeed: 2
   animDmgTime: 1
@@ -4263,13 +4263,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &705078674470602099 stripped
+--- !u!224 &705078674470600983 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 705078674470601150}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &705078674470602072 stripped
+--- !u!114 &705078674470601084 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
