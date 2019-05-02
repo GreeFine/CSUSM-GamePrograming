@@ -7,7 +7,10 @@ using UnityEngine.Networking;
 public class GameRule : NetworkBehaviour
 {
   public static GameRule instance = null;
+  public NetworkManager netmanager = null;
   public GameObject[] playerBase = new GameObject[2];
+  public List<string> unitNames = new List<string>();
+
   public Dictionary<string, Unit> unitMap = new Dictionary<string, Unit>();
   public Dictionary<string, Building> buildingMap = new Dictionary<string, Building>();
   public Dictionary<string, uint> priceMap = new Dictionary<string, uint>();
@@ -21,6 +24,7 @@ public class GameRule : NetworkBehaviour
 
   private void AddNewUnit(string name, uint price)
   {
+    unitNames.Add(name);
     unitMap.Add(name, Resources.Load<Unit>("Prefabs/Units/" + name));
     buildingMap.Add(name, Resources.Load<Building>("Prefabs/Buildings/Units/" + name + "_B"));
     priceMap.Add(name, price);
@@ -31,9 +35,15 @@ public class GameRule : NetworkBehaviour
     if (instance == null)
     {
       instance = this;
-      AddNewUnit("Nature/Spider", 60);
-      AddNewUnit("Orc/Orc_archer", 100);
-      AddNewUnit("Orc/Orc_light_infantry", 150);
+      AddNewUnit("Orc/Orc_worker", 50);
+      AddNewUnit("Orc/Orc_light_infantry", 100);
+      AddNewUnit("Orc/Orc_LightCavalry", 100);
+      AddNewUnit("Orc/Orc_spearman", 120);
+      AddNewUnit("Orc/Orc_archer", 140);
+      AddNewUnit("Orc/Orc_shaman", 200);
+      AddNewUnit("Orc/Orc_heavy_infantry", 210);
+      AddNewUnit("Orc/Orc_HeavyCavalry", 240);
+      AddNewUnit("Orc/Orc_MountedShaman", 300);
     }
     else
       Destroy(this);

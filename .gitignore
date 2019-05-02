@@ -10,3 +10,7 @@ Assembly-CSharp\.csproj
 obj/Debug/
 
 CSUSM-GamePrograming\.sln
+
+Logs/
+
+build\.x86_64

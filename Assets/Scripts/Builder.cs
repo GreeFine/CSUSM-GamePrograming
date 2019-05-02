@@ -49,11 +49,24 @@ public class Builder : NetworkBehaviour
     if (!GameRule.instance.gameStarted)
       return;
     if (Input.GetKeyDown(KeyCode.Alpha1))
-      CreateGhost("Nature/Spider");
+      CreateGhost(GameRule.instance.unitNames[0]);
     if (Input.GetKeyDown(KeyCode.Alpha2))
-      CreateGhost("Orc/Orc_light_infantry");
+      CreateGhost(GameRule.instance.unitNames[1]);
     if (Input.GetKeyDown(KeyCode.Alpha3))
-      CreateGhost("Orc/Orc_archer");
+      CreateGhost(GameRule.instance.unitNames[2]);
+    if (Input.GetKeyDown(KeyCode.Alpha4))
+      CreateGhost(GameRule.instance.unitNames[3]);
+    if (Input.GetKeyDown(KeyCode.Alpha5))
+      CreateGhost(GameRule.instance.unitNames[4]);
+    if (Input.GetKeyDown(KeyCode.Alpha6))
+      CreateGhost(GameRule.instance.unitNames[5]);
+    if (Input.GetKeyDown(KeyCode.Alpha7))
+      CreateGhost(GameRule.instance.unitNames[6]);
+    if (Input.GetKeyDown(KeyCode.Alpha8))
+      CreateGhost(GameRule.instance.unitNames[7]);
+    if (Input.GetKeyDown(KeyCode.Alpha9))
+      CreateGhost(GameRule.instance.unitNames[8]);
+
     if (positioning)
     {
       Vector3 pos;

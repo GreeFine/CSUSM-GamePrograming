@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+  public float maxX = 10.0f;
+  public float maxY = 10.0f;
   public float cameraSpeed = 50f;
   private bool focused = true;
   private Vector3 startPos;
@@ -22,12 +24,14 @@ public class CameraController : MonoBehaviour
 
   private void Update()
   {
+    var pos = this.transform.position;
     if (Input.GetKeyDown(KeyCode.Space))
       this.transform.position = startPos;
     if (focused)
+    //  pos.x < maxX && pos.y < maxY &&
+    //  pos.x > -maxX && pos.y > -maxY)
     {
       Vector3 updatedPosition = Vector3.zero;
-
       if (Input.mousePosition.y < 10f)
         updatedPosition -= Vector3.right * cameraSpeed * Time.deltaTime;
       else if (Input.mousePosition.y > Screen.height - 10f)
