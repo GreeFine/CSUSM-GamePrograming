@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitIcone : MonoBehaviour
@@ -11,11 +11,6 @@ public class UnitIcone : MonoBehaviour
     {
         GetComponent<Image>().sprite = icone;
         GetComponentInChildren<Text>().text = manaCost;
-    }
-
-    private void OnMouseOver()
-    {
-        
     }
 
     public void OnIconeClick()

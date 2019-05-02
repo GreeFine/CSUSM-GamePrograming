@@ -1,0 +1,535 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2889261268414847884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5557044608195014529, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_Name
+      value: UnitsIconesGrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557044608195014530, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194479197141536163, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194479197141536163, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194479197141536163, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194479197141536163, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194479197141536163, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194479197141536163, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962191729163456037, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: d7f2c694918eeb74b8e0f2231f98658d,
+        type: 3}
+    - target: {fileID: 7962191729163456037, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962191729163456037, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424962264322301104, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424962264322301104, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424962264322301104, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424962264322301104, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424962264322301104, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424962264322301104, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868424812272820022, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: d467c13c2fbd4924e8ab2c042f48ce8d,
+        type: 3}
+    - target: {fileID: 3868424812272820022, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868424812272820022, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/light_infantry
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698931711152330634, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698931711152330634, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698931711152330634, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698931711152330634, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698931711152330634, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698931711152330634, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224498733601379340, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 6e8fdbb7376fe824c960869eef50aa1c,
+        type: 3}
+    - target: {fileID: 224498733601379340, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224498733601379340, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/light_cavalry
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008550878879270251, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008550878879270251, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008550878879270251, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008550878879270251, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008550878879270251, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008550878879270251, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434034079546312429, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 4386c55ff5df44246aa9a7fc1549e17b,
+        type: 3}
+    - target: {fileID: 8434034079546312429, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434034079546312429, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/spearman
+      objectReference: {fileID: 0}
+    - target: {fileID: 62075551037172847, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 62075551037172847, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 62075551037172847, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 62075551037172847, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 62075551037172847, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 62075551037172847, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789299497495097321, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d79f3659899d4c41b1f09afe5c01339,
+        type: 3}
+    - target: {fileID: 2789299497495097321, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789299497495097321, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314220687651120661, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314220687651120661, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314220687651120661, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314220687651120661, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314220687651120661, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314220687651120661, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8058905595227039123, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 16ce6996ce4a1cc40bd353baad32da49,
+        type: 3}
+    - target: {fileID: 8058905595227039123, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8058905595227039123, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914763573887110787, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914763573887110787, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914763573887110787, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914763573887110787, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914763573887110787, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914763573887110787, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393700758266465541, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ace1d64fbfc9a847bf05e834b999293,
+        type: 3}
+    - target: {fileID: 8393700758266465541, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393700758266465541, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/heavy_infantry
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647326525956461446, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647326525956461446, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647326525956461446, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647326525956461446, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647326525956461446, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647326525956461446, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509270733203623936, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 6df158aff1f5f1d499c13dac66285557,
+        type: 3}
+    - target: {fileID: 7509270733203623936, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509270733203623936, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/heavy_cavalry
+      objectReference: {fileID: 0}
+    - target: {fileID: 38015550508077359, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38015550508077359, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38015550508077359, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38015550508077359, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38015550508077359, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38015550508077359, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805200022472872617, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: icone
+      value: 
+      objectReference: {fileID: 21300000, guid: 99712e13f51cd7647a29d22321a3e6fc,
+        type: 3}
+    - target: {fileID: 2805200022472872617, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: manaCost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805200022472872617, guid: dc8a8280ed11606448c43e2c6ca6cb42,
+        type: 3}
+      propertyPath: unit
+      value: Undead/mounted_mage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc8a8280ed11606448c43e2c6ca6cb42, type: 3}
