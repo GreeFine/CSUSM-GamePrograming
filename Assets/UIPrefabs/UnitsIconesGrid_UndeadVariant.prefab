@@ -529,7 +529,7 @@ PrefabInstance:
     - target: {fileID: 2805200022472872617, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Undead/UD_mounted_mage
+      value: Undead/UD_mage_mounted
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc8a8280ed11606448c43e2c6ca6cb42, type: 3}

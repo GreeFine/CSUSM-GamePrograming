@@ -16,8 +16,8 @@ public class GameRule : NetworkBehaviour
   public Dictionary<string, uint> priceMap = new Dictionary<string, uint>();
 
   public bool gameStarted = false;
-  private const uint startingMana = 50;
-  private const uint incomPersec = 3;
+  private const uint startingMana = 20;
+  private const uint incomPersec = 6;
   public uint[] mana = new uint[2];
   private uint timer = 0;
   private uint numberOfPlayer = 0;
