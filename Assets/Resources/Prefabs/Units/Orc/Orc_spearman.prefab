@@ -3363,7 +3363,7 @@ Transform:
   - {fileID: 453148}
   - {fileID: 400890}
   - {fileID: 416712}
-  - {fileID: 6298461433628755587}
+  - {fileID: 90089761906185157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -3496,12 +3496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc30ec2d8ab35d469669e97163e9801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 3
+  atkDmg: 5
   atkRange: 3
   atkSpeed: 1
   Debug: 0
-  healthBar: {fileID: 6298461433628755688}
-  maxHealth: 6
+  healthBar: {fileID: 527718152920668188}
+  maxHealth: 15
   moveSpeed: 2
   animDmgTime: 1
 --- !u!1 &177250
@@ -4263,13 +4263,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &6298461433628755587 stripped
+--- !u!224 &90089761906185157 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 6298461433628755498}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6298461433628755688 stripped
+--- !u!114 &527718152920668188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}

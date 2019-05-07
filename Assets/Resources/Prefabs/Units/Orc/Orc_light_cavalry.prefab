@@ -1812,7 +1812,7 @@ GameObject:
   - component: {fileID: 5904273849648334948}
   - component: {fileID: 7211878634366029971}
   m_Layer: 0
-  m_Name: Orc_LightCavalry
+  m_Name: Orc_light_cavalry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1851,7 +1851,7 @@ Transform:
   - {fileID: 438284}
   - {fileID: 439166}
   - {fileID: 419976}
-  - {fileID: 8956232514698203608}
+  - {fileID: 3054108370794579102}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -1970,12 +1970,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc30ec2d8ab35d469669e97163e9801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmg: 5
+  atkDmg: 15
   atkRange: 3
   atkSpeed: 1.5
   Debug: 0
-  healthBar: {fileID: 8956232514698203571}
-  maxHealth: 20
+  healthBar: {fileID: 3202230402346372935}
+  maxHealth: 30
   moveSpeed: 3
   animDmgTime: 1.1
 --- !u!1 &138642
@@ -4756,13 +4756,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &8956232514698203608 stripped
+--- !u!224 &3054108370794579102 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 8956232514698203505}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8956232514698203571 stripped
+--- !u!114 &3202230402346372935 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}

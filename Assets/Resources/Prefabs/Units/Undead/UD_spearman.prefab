@@ -978,7 +978,7 @@ Transform:
   - {fileID: 497996}
   - {fileID: 401472}
   - {fileID: 403846}
-  - {fileID: 4880919784906805246}
+  - {fileID: 1554924722518104569}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -1101,8 +1101,8 @@ MonoBehaviour:
   atkRange: 3
   atkSpeed: 1.5
   Debug: 0
-  healthBar: {fileID: 4880919784906803258}
-  maxHealth: 20
+  healthBar: {fileID: 1407083785906278944}
+  maxHealth: 15
   moveSpeed: 3
   animDmgTime: 1.1
 --- !u!1 &171772
@@ -1734,13 +1734,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 606e38753710ecd459ccd795fca9052b, type: 3}
---- !u!224 &4880919784906805246 stripped
+--- !u!224 &1554924722518104569 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6208407133120222703, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
   m_PrefabInstance: {fileID: 4880919784906804246}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4880919784906803258 stripped
+--- !u!114 &1407083785906278944 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5781062335849045558, guid: 606e38753710ecd459ccd795fca9052b,
     type: 3}
