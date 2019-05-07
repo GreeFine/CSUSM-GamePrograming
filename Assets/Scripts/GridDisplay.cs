@@ -8,17 +8,17 @@ public class GridDisplay : MonoBehaviour
   public float gridSizeZ = 10f;
   public float largeStep = 1f;
   public float smallStep = 0.2f;
-  public Color mainColor = new Color(0f, 1f, 0f, 1f);
+  private Color mainColor = new Color(0.26f, 0.44f, 0.6f, 1f);
   public Color subColor = new Color(1f, 1f, 1f, 1f);
-  public Color lineColor = new Color(1f, 0f, 0f, 1f);
+  private Color lineColor = new Color(1f, 0f, 0f, 1f);
   public bool subActiv = false;
-  public bool activ = true;
+  public bool activ = false;
 
   private Material lineMaterial;
   private float sizeX;
-  private float startX = -1;
+  private float startX = 2;
   private float startY = 0.05f;
-  private float startZ = -1;
+  private float startZ = 2;
   private float sizeZ;
 
   private void Start()
@@ -41,9 +41,9 @@ public class GridDisplay : MonoBehaviour
 
   public void Init()
   {
-    GameObject spawnArea = GameRule.instance.playerBase[PlayerController.pId];//FIXME: Building area not on 0,0 of Base ?
-    startX = spawnArea.transform.position.x + (sizeX / -2f);
-    startZ = spawnArea.transform.position.y + (sizeZ / -2f);
+    Transform spawnArea = GameRule.instance.playerBase[PlayerController.pId].transform.Find("BuildingArea");
+    startX = spawnArea.position.x + (sizeX / -2f);
+    startZ = spawnArea.position.y + (sizeZ / -2f);
   }
 
   private void OnPostRender()

@@ -36,24 +36,52 @@ public class Builder : NetworkBehaviour
 
   private void CreateGhost(string name)
   {
-    currrentUnitName = name;
+    Camera.main.GetComponent<GridDisplay>().activ = true;
     if (ghost != null)
       Destroy(ghost.gameObject);
     positioning = true;
-    Quaternion quaternion = new Quaternion(0, PlayerController.pId * 180, 0, 0);
-    ghost = Instantiate(GameRule.instance.buildingMap[currrentUnitName], this.transform.position, quaternion);
+
+    currrentUnitName = name;
+    Building building = GameRule.instance.buildingMap[currrentUnitName];
+    ghost = Instantiate(building, this.transform.position, building.transform.rotation);
+    ghost.transform.Rotate(0f, PlayerController.pId * 180f, 0f, Space.Self);
+  }
+
+  private void DestroyGhost()
+  {
+    Camera.main.GetComponent<GridDisplay>().activ = false;
+    if (ghost == null)
+      return;
+    positioning = false;
+    Destroy(ghost.gameObject);
+    ghost = null;
   }
 
   private void Update()
   {
     if (!GameRule.instance.gameStarted)
       return;
-    if (Input.GetKeyDown(KeyCode.Alpha1))
-      CreateGhost("Nature/Spider");
-    if (Input.GetKeyDown(KeyCode.Alpha2))
-      CreateGhost("Orc/Orc_light_infantry");
-    if (Input.GetKeyDown(KeyCode.Alpha3))
-      CreateGhost("Orc/Orc_archer");
+    else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButton(1))
+      DestroyGhost();
+    else if (Input.GetKeyDown(KeyCode.Alpha1))
+      CreateGhost(GameRule.instance.unitNames[0]);
+    else if (Input.GetKeyDown(KeyCode.Alpha2))
+      CreateGhost(GameRule.instance.unitNames[1]);
+    else if (Input.GetKeyDown(KeyCode.Alpha3))
+      CreateGhost(GameRule.instance.unitNames[2]);
+    else if (Input.GetKeyDown(KeyCode.Alpha4))
+      CreateGhost(GameRule.instance.unitNames[3]);
+    else if (Input.GetKeyDown(KeyCode.Alpha5))
+      CreateGhost(GameRule.instance.unitNames[4]);
+    else if (Input.GetKeyDown(KeyCode.Alpha6))
+      CreateGhost(GameRule.instance.unitNames[5]);
+    else if (Input.GetKeyDown(KeyCode.Alpha7))
+      CreateGhost(GameRule.instance.unitNames[6]);
+    else if (Input.GetKeyDown(KeyCode.Alpha8))
+      CreateGhost(GameRule.instance.unitNames[7]);
+    else if (Input.GetKeyDown(KeyCode.Alpha9))
+      CreateGhost(GameRule.instance.unitNames[8]);
+
     if (positioning)
     {
       Vector3 pos;
@@ -62,9 +90,7 @@ public class Builder : NetworkBehaviour
 
       if (Input.GetMouseButtonDown(0))
       {
-        positioning = false;
-        Destroy(ghost.gameObject);
-        ghost = null;
+        DestroyGhost();
         if (isServer)
           CmdPlaceNewBuilding(PlayerController.pId, currrentUnitName, pos);
         else if (buyBuilding(PlayerController.pId, currrentUnitName))
@@ -89,8 +115,11 @@ public class Builder : NetworkBehaviour
     if (buyBuilding(pId, buildingName))
     {
       Spawner spawner = GameRule.instance.playerBase[pId].GetComponentInChildren<Spawner>();
-      Quaternion quaternion = new Quaternion(0, pId * 180, 0, 0);
-      Building tmp = Instantiate(GameRule.instance.buildingMap[buildingName], pos, quaternion);
+      Building building = GameRule.instance.buildingMap[buildingName];
+
+      Building tmp = Instantiate(building, pos, building.transform.rotation);
+      tmp.transform.Rotate(0f, pId * 180f, 0f, Space.Self);
+
       pos.x += spawner.transform.localPosition.x - this.transform.localPosition.x;
       spawner.placedUnits.Add((pId, buildingName, pos));
       NetworkServer.Spawn(tmp.gameObject);

@@ -22,15 +22,11 @@ public abstract class AAttacker : NetworkBehaviour
     atkReload -= Time.deltaTime;
     if (atkReload <= 0)
     {
-      if (Debug)
-        print("redo?1: " + atkReload.ToString() + " | " + this.GetInstanceID().ToString());
       if (isAttacking)
         Cancel();
       if (currentTarget == null && targets.Count > 0)
         ChooseTarget();
       StartAttack();
-      if (Debug)
-        print("redo?2: " + atkReload.ToString() + " | " + this.GetInstanceID().ToString());
     }
   }
 
@@ -69,8 +65,6 @@ public abstract class AAttacker : NetworkBehaviour
     else
     {
       isAttacking = true;
-      if (Debug)
-        print("Reload?: " + atkReload + " | " + atkSpeed);
       atkReload += atkSpeed;
       LaunchAttack();
     }
