@@ -8,6 +8,6 @@ public class Economy : MonoBehaviour
   private void FixedUpdate()
   {
     if (GameRule.instance.gameStarted)
-      GetComponent<Text>().text = "Mana: " + GameRule.instance.mana[PlayerController.pId];
+      GetComponent<Text>().text = GameRule.instance.mana[PlayerController.pId] + "";
   }
 }

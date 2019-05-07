@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class Builder : NetworkBehaviour
 {
+  public static Builder instance = null;
   private bool positioning = false;
   private Building ghost = null;
   private Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -13,8 +14,8 @@ public class Builder : NetworkBehaviour
 
   private void Start()
   {
-    if (!isLocalPlayer)
-      this.enabled = false;
+    if (isLocalPlayer)
+      instance = this;
   }
 
   public bool MouseRayCast(out Vector3 pos)
@@ -34,7 +35,7 @@ public class Builder : NetworkBehaviour
     return false;
   }
 
-  private void CreateGhost(string name)
+  public void CreateGhost(string name)
   {
     Camera.main.GetComponent<GridDisplay>().activ = true;
     if (ghost != null)
@@ -63,24 +64,6 @@ public class Builder : NetworkBehaviour
       return;
     else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButton(1))
       DestroyGhost();
-    else if (Input.GetKeyDown(KeyCode.Alpha1))
-      CreateGhost(GameRule.instance.unitNames[0]);
-    else if (Input.GetKeyDown(KeyCode.Alpha2))
-      CreateGhost(GameRule.instance.unitNames[1]);
-    else if (Input.GetKeyDown(KeyCode.Alpha3))
-      CreateGhost(GameRule.instance.unitNames[2]);
-    else if (Input.GetKeyDown(KeyCode.Alpha4))
-      CreateGhost(GameRule.instance.unitNames[3]);
-    else if (Input.GetKeyDown(KeyCode.Alpha5))
-      CreateGhost(GameRule.instance.unitNames[4]);
-    else if (Input.GetKeyDown(KeyCode.Alpha6))
-      CreateGhost(GameRule.instance.unitNames[5]);
-    else if (Input.GetKeyDown(KeyCode.Alpha7))
-      CreateGhost(GameRule.instance.unitNames[6]);
-    else if (Input.GetKeyDown(KeyCode.Alpha8))
-      CreateGhost(GameRule.instance.unitNames[7]);
-    else if (Input.GetKeyDown(KeyCode.Alpha9))
-      CreateGhost(GameRule.instance.unitNames[8]);
 
     if (positioning)
     {

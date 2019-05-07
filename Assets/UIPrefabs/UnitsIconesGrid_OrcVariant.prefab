@@ -202,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 3868424812272820022, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/light_infantry
+      value: Orc/Orc_light_infantry
       objectReference: {fileID: 0}
     - target: {fileID: 3868424812272820022, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 224498733601379340, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/light_cavalry
+      value: Orc/Orc_light_cavalry
       objectReference: {fileID: 0}
     - target: {fileID: 224498733601379340, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -294,7 +294,7 @@ PrefabInstance:
     - target: {fileID: 8434034079546312429, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/spearman
+      value: Orc/Orc_spearman
       objectReference: {fileID: 0}
     - target: {fileID: 8434034079546312429, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -340,7 +340,7 @@ PrefabInstance:
     - target: {fileID: 2789299497495097321, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/archer
+      value: Orc/Orc_archer
       objectReference: {fileID: 0}
     - target: {fileID: 2789299497495097321, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -386,7 +386,7 @@ PrefabInstance:
     - target: {fileID: 8058905595227039123, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/shaman
+      value: Orc/Orc_shaman
       objectReference: {fileID: 0}
     - target: {fileID: 8058905595227039123, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -432,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 8393700758266465541, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/heavy_infantry
+      value: Orc/Orc_heavy_infantry
       objectReference: {fileID: 0}
     - target: {fileID: 8393700758266465541, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -478,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 7509270733203623936, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/heavy_cavalry
+      value: Orc/Orc_heavy_cavalry
       objectReference: {fileID: 0}
     - target: {fileID: 7509270733203623936, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
@@ -524,7 +524,7 @@ PrefabInstance:
     - target: {fileID: 2805200022472872617, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
       propertyPath: unit
-      value: Orc/mounted_shaman
+      value: Orc/Orc_mounted_shaman
       objectReference: {fileID: 0}
     - target: {fileID: 2805200022472872617, guid: dc8a8280ed11606448c43e2c6ca6cb42,
         type: 3}
