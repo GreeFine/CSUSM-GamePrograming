@@ -15,7 +15,6 @@ public class UnitIcone : MonoBehaviour
 
   public void OnIconeClick()
   {
-    Debug.Log("?" + unit);
     Builder.instance.CreateGhost(unit);
   }
 }

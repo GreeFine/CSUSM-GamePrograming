@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
   private float maxX = 65.0f;
   private float maxZ = 25.0f;
-  public float cameraSpeed = 50f;
+  public float cameraSpeed = 60f;
   private bool focused = true;
   private Vector3 startPos;
   private Vector3 startPosP2;
@@ -18,13 +18,19 @@ public class CameraController : MonoBehaviour
 
   public void Init()
   {
+    GameObject canvas = gameObject.transform.Find("Canvas").gameObject;
+    canvas.SetActive(true);
+    if (PlayerController.pId == 0)
+      canvas.transform.Find("UnitsIconesGrid_UndeadVariant").gameObject.SetActive(true);
+    else
+      canvas.transform.Find("UnitsIconesGrid_OrcVariant").gameObject.SetActive(true);
+
     this.transform.position = GameRule.instance.playerBase[PlayerController.pId].transform.position;
     this.transform.position += new Vector3(0, 15, 0);
     if (PlayerController.pId == 1)
       this.transform.eulerAngles = new Vector3(60, 270, 0);
 
     startPos = this.transform.position;
-    gameObject.transform.Find("Canvas").gameObject.SetActive(true);
   }
 
   private void Update()

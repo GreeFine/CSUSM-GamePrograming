@@ -16,8 +16,8 @@ public class GameRule : NetworkBehaviour
   public Dictionary<string, uint> priceMap = new Dictionary<string, uint>();
 
   public bool gameStarted = false;
-  private const uint startingMana = 200;
-  private const uint incomPersec = 10;
+  private const uint startingMana = 50;
+  private const uint incomPersec = 3;
   public uint[] mana = new uint[2];
   private uint timer = 0;
   private uint numberOfPlayer = 0;
@@ -35,15 +35,25 @@ public class GameRule : NetworkBehaviour
     if (instance == null)
     {
       instance = this;
-      AddNewUnit("Orc/Orc_worker", 50);
-      AddNewUnit("Orc/Orc_light_infantry", 100);
-      AddNewUnit("Orc/Orc_LightCavalry", 100);
-      AddNewUnit("Orc/Orc_spearman", 120);
-      AddNewUnit("Orc/Orc_archer", 140);
-      AddNewUnit("Orc/Orc_shaman", 200);
-      AddNewUnit("Orc/Orc_heavy_infantry", 210);
-      AddNewUnit("Orc/Orc_HeavyCavalry", 240);
-      AddNewUnit("Orc/Orc_MountedShaman", 300);
+      AddNewUnit("Orc/Orc_worker", 10);
+      AddNewUnit("Orc/Orc_light_infantry", 30);
+      AddNewUnit("Orc/Orc_light_cavalry", 50);
+      AddNewUnit("Orc/Orc_spearman", 50);
+      AddNewUnit("Orc/Orc_archer", 70);
+      AddNewUnit("Orc/Orc_shaman", 100);
+      AddNewUnit("Orc/Orc_heavy_infantry", 100);
+      AddNewUnit("Orc/Orc_heavy_cavalry", 150);
+      AddNewUnit("Orc/Orc_mounted_shaman", 200);
+
+      AddNewUnit("Undead/UD_worker", 10);
+      AddNewUnit("Undead/UD_light_infantry", 30);
+      AddNewUnit("Undead/UD_light_cavalry", 50);
+      AddNewUnit("Undead/UD_spearman", 50);
+      AddNewUnit("Undead/UD_archer", 70);
+      AddNewUnit("Undead/UD_mage", 100);
+      AddNewUnit("Undead/UD_heavy_infantry", 100);
+      AddNewUnit("Undead/UD_heavy_cavalry", 150);
+      AddNewUnit("Undead/UD_mage_mounted", 200);
     }
     else
       Destroy(this);
