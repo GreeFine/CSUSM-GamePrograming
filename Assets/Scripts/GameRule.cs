@@ -29,7 +29,6 @@ public class GameRule : NetworkBehaviour
     buildingMap.Add(name, Resources.Load<Building>("Prefabs/Buildings/Units/" + name + "_B"));
     priceMap.Add(name, price);
   }
-
   private void Awake()
   {
     if (instance == null)
@@ -62,6 +61,7 @@ public class GameRule : NetworkBehaviour
   [ClientRpc]
   public void RpcGameStarted()
   {
+    print("???GS");
     instance.mana[0] = startingMana;
     instance.mana[1] = startingMana;
     gameStarted = true;
